@@ -1,19 +1,23 @@
-import { conn } from "../db.js";
+// import { client } from "../db.js";
 
-// const ACCION QUERY = async (req, res) => {
+// const tipoQuery1 = async (req, res) => {
     
-//     const X = req.body.X;
-//     const Y = req.params.Y;
-    
-//     const [rows, fields] = await conn.query
-//     ('QUERY', [X,Y]);
-    
-//     res.json();
+// const res = await client.query("SELECT * FROM <nombre_tabla>");
+// console.log(res.rows); 
 // };
 
+// const tipoQuery2 = async (req, res) => {
+    
+//     const valor1 = req.params.id;
+//     const valor2 = req.body.nombre;
 
-// const pacientes = {
-//     NOMBRES CONST
+//     await client.query("INSERT INTO <nombre_tabla> (columna1, columna2) VALUES ($1, $2)", [valor1, valor2]); 
+//     //$X = al ?, o sea, va a ser reemplazado por valorX
 // };
 
-// export default pacientes;
+const pacientes = {
+//     tipoQuery1,
+//     tipoQuery2
+};
+
+export default pacientes;
