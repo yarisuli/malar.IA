@@ -1,10 +1,10 @@
-// import { client } from "../db.js";
+ import { client } from "../db.js";
 
-// const tipoQuery1 = async (req, res) => {
-
-//     const result = await client.query("SELECT * FROM <nombre_tabla>");
-//     console.log(result.rows);
-// };
+ const getDiag = async (req, res) => 
+    {
+    const res = await client.query("SELECT * FROM diagnostico");
+    console.log(res.rows); 
+    };
 
 // const tipoQuery2 = async (req, res) => {
 
@@ -17,8 +17,8 @@
 // };
 
 const diagnostico = {
-//     tipoQuery1,
-//     tipoQuery2
+    getDiag,
+    //     tipoQuery2
 };
 
 export default diagnostico;

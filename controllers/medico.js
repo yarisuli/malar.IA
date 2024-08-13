@@ -1,10 +1,10 @@
-// import { client } from "../db.js";
+import { client } from "../db.js";
 
-// const tipoQuery1 = async (req, res) => {
-    
-// const res = await client.query("SELECT * FROM <nombre_tabla>");
-// console.log(res.rows); 
-// };
+const getMedico = async (req, res) => 
+    {
+    const res = await client.query("SELECT * FROM medico");
+    console.log(res.rows); 
+    };
 
 // const tipoQuery2 = async (req, res) => {
     
@@ -15,9 +15,9 @@
 //     //$X = al ?, o sea, va a ser reemplazado por valorX
 // };
 
-const pacientes = {
-//     tipoQuery1,
-//     tipoQuery2
+const medicos = {
+    getMedico,
+    //tipoQuery2
 };
 
-export default pacientes;
+export default medicos;
