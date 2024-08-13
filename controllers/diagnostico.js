@@ -1,24 +1,47 @@
  import { client } from "../db.js";
 
- const getDiag = async (req, res) => 
-    {
+const getDiagnosticos = async (req, res) => 
+{
     const res = await client.query("SELECT * FROM diagnostico");
     console.log(res.rows); 
-    };
+};
 
-// const tipoQuery2 = async (req, res) => {
+const getDiagnostico = async (req, res) => 
+{
+    const diagnosticoId = req.params.diagnosticoId;
 
-//     const valor1 = req.params.id;
-//     const valor2 = req.body.nombre;
+    const res = await client.query("SELECT * FROM diagnostico WHERE id_diag = $1", [diagnosticoId]);
+    console.log(res.rows); 
+};
 
+const createDiagnostico = async (req, res) => 
+{
+    const foto = req.body.foto;
+    const analisisIA = req.body.analisisIA;
+    const notas = req.body.notas;
+    const nombrePaciente = req.body.nombrePaciente;
 
-//     await client.query("INSERT INTO <nombre_tabla> (columna1, columna2) VALUES ($1, $2)", [valor1, valor2]);
-//     //$X = al ?, o sea, va a ser reemplazado por valorX
-// };
+    await client.query(`INSERT INTO diagnostico (foto, analisis_ia, notas, id_paciente)  
+    VALUES ($1, $2, $3, (SELECT id_paciente FROM paciente WHERE paciente.nombre = $4))`, [foto, analisisIA, notas, nombrePaciente]);
 
-const diagnostico = {
-    getDiag,
-    //     tipoQuery2
+    res.send("se creó el diagnóstico correctamente.");
+};
+
+const eliminarDiagnostico = async (req, res) => 
+{
+    const diagnosticoId = req.params.diagnosticoId;
+    
+    const res = await client.query("DELETE FROM diagnostico WHERE id_diag = $1", [diagnosticoId]);
+    
+    res.send("se eliminó el diagnóstico correctamente.");
+};
+
+const diagnostico = 
+{
+    getDiagnosticos,
+    getDiagnostico,
+    createDiagnostico, 
+    eliminarDiagnostico
 };
 
 export default diagnostico;
