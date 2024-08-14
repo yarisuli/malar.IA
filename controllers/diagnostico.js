@@ -36,12 +36,25 @@ const eliminarDiagnostico = async (req, res) =>
     res.send("se eliminó el diagnóstico correctamente.");
 };
 
+const updateDiagnostico = async (req, res) => 
+    {
+        const diagnosticoId = req.params.diagnosticoId;
+        const notas = req.body.notas;
+        
+        const res = await client.query("UPDATE diagnostico SET notas = $1 WHERE id_diag = $2", [notas, diagnosticoId]);
+        
+        res.send("se actualizó correctamente.");
+    };
+
+
+
 const diagnostico = 
 {
     getDiagnosticos,
     getDiagnostico,
     createDiagnostico, 
-    eliminarDiagnostico
+    eliminarDiagnostico, 
+    updateDiagnostico
 };
 
 export default diagnostico;

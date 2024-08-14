@@ -40,12 +40,23 @@ const eliminarPaciente = async (req, res) =>
     res.send("se eliminó el paciente correctamente.");
 };
 
+const updatePaciente = async (req, res) => 
+    {
+        const pacienteId = req.params.pacienteId;
+        const mail = req.body.mail;
+        
+        const res = await client.query("UPDATE paciente SET mail = $1 WHERE id_diag = $2", [mail, pacienteId]);
+        
+        res.send("se actualizó correctamente.");
+    };
+
 const pacientes = 
 {
     getPacientes,
     getPaciente,
     createPaciente,
-    eliminarPaciente
+    eliminarPaciente,
+    updatePaciente
 };
 
 export default pacientes;
