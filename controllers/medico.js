@@ -47,7 +47,7 @@ const updateMedico = async (req, res) =>
         
         res.send("se actualizó correctamente.");
     };
-const medicos =
+const medico =
 {
     getMedicos,
     getMedico,
@@ -56,4 +56,4 @@ const medicos =
     updateMedico
 };
 
-export default medicos;
+export default medico;
