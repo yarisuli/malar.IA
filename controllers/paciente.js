@@ -31,7 +31,7 @@ const createPaciente = async (req, res) => {
     res.send("se creó el paciente correctamente.");
 };
 
-const eliminarPaciente = async (req, res) => 
+const deletePaciente = async (req, res) => 
 {
     const pacienteId = req.params.pacienteId;
         
@@ -55,7 +55,7 @@ const pacientes =
     getPacientes,
     getPaciente,
     createPaciente,
-    eliminarPaciente,
+    deletePaciente,
     updatePaciente
 };
 

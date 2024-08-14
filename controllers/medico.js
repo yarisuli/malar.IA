@@ -29,7 +29,7 @@ const createMedico = async (req, res) =>
     res.send("se creó el usuario correctamente.");
 };
 
-const eliminarMedico = async (req, res) => 
+const deleteMedico = async (req, res) => 
 {
     const medicoId = req.params.medicoId;
 
@@ -52,7 +52,7 @@ const medicos =
     getMedicos,
     getMedico,
     createMedico, 
-    eliminarMedico,
+    deleteMedico,
     updateMedico
 };
 

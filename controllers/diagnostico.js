@@ -27,7 +27,7 @@ const createDiagnostico = async (req, res) =>
     res.send("se creó el diagnóstico correctamente.");
 };
 
-const eliminarDiagnostico = async (req, res) => 
+const deleteDiagnostico = async (req, res) => 
 {
     const diagnosticoId = req.params.diagnosticoId;
     
@@ -53,7 +53,7 @@ const diagnostico =
     getDiagnosticos,
     getDiagnostico,
     createDiagnostico, 
-    eliminarDiagnostico, 
+    deleteDiagnostico, 
     updateDiagnostico
 };
 
