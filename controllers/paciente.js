@@ -2,16 +2,16 @@ import { client } from "../db.js";
 
 const getPacientes = async (req, res) => 
 {
-    const res = await client.query("SELECT * FROM paciente");
-    console.log(res.rows); 
+    const result = await client.query("SELECT * FROM paciente");
+    res.json(result.rows); 
 };
 
 const getPaciente = async (req, res) => 
 {
     const pacienteId = req.params.pacienteId;
     
-    const res = await client.query("SELECT * FROM paciente WHERE id_paciente = $1", [medicoId]);
-    console.log(res.rows); 
+    const result = await client.query("SELECT * FROM paciente WHERE id_paciente = $1", [medicoId]);
+    res.json(result.rows); 
 };
 
 const createPaciente = async (req, res) => {
@@ -24,7 +24,7 @@ const createPaciente = async (req, res) => {
     const pfp = req.body.pfp;
     const nombreMedico = req.body.nombreMedico; //chequear como es que REST consigue data de bdd
 
-    await client.query(`
+    const result = await client.query(`
     INSERT INTO paciente (nombre, apellido, nacimiento, estado, mail, pfp, id_medico)
     VALUES ($1, $2, $3, $4, $5, $6, (SELECT id_medico FROM medico WHERE medico.nombre = $7))`, [nombre, apellido, nacimiento, estado, mail, pfp, nombreMedico]); 
 
@@ -35,7 +35,7 @@ const deletePaciente = async (req, res) =>
 {
     const pacienteId = req.params.pacienteId;
         
-    const res = await client.query("DELETE FROM paciente WHERE id_paciente = $1", [pacienteId]); 
+    const result = await client.query("DELETE FROM paciente WHERE id_paciente = $1", [pacienteId]); 
 
     res.send("se eliminó el paciente correctamente.");
 };
@@ -45,7 +45,7 @@ const updatePaciente = async (req, res) =>
         const pacienteId = req.params.pacienteId;
         const mail = req.body.mail;
         
-        const res = await client.query("UPDATE paciente SET mail = $1 WHERE id_diag = $2", [mail, pacienteId]);
+        const result = await client.query("UPDATE paciente SET mail = $1 WHERE id_diag = $2", [mail, pacienteId]);
         
         res.send("se actualizó correctamente.");
     };

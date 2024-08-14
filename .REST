@@ -2,30 +2,31 @@
 
 ###Obtener todos los diagnosticos: 
 
-GET https://localhost:3000/diagnostico HTTP/1.1
+GET http://localhost:3000/diagnostico HTTP/1.1
 
 ###Obtener un diagnostico por ID: 
 
-GET https://localhost:3000/diagnostico/1 HTTP/1.1
+GET http://localhost:3000/diagnostico/1 HTTP/1.1
 
 ###Crear un nuevo diagnostico: 
 
-POST https://localhost:3000/diagnostico  HTTP/1.1
-Content-Type: application/json
+POST http://localhost:3000/diagnostico  HTTP/1.1
+Content-Type: application/json 
+
 {
-    "foto": "urlperomedapajaescribir",
-    "analisisIA":"texto largo core",
-    "notas": "texto largo core pt2", 
-    "nombrePaciente": "Juan"
+  "foto": "urlperomedapajaescribir",
+  "analisisIA":"texto largo core",
+  "notas": "texto largo core pt2", 
+  "nombrePaciente": "Juan"
 }
 
 ###Eliminar un diagnostico por ID: 
 
-DELETE https://localhost:3000/diagnostico/1  HTTP/1.1
+DELETE http://localhost:3000/diagnostico/1  HTTP/1.1
 
 ###Actualizar las notas de un diagnostico por ID: 
 
-PUT https://localhost:3000/diagnostico/1  HTTP/1.1
+PUT http://localhost:3000/diagnostico/1  HTTP/1.1
 
 {
   "notas": "same shit."
@@ -34,15 +35,15 @@ PUT https://localhost:3000/diagnostico/1  HTTP/1.1
 ###MEDICOS!!!
 ###Obtener todos los medicos: 
 
-GET https://localhost:3000/medico HTTP/1.1
+GET http://localhost:3000/medico HTTP/1.1
 
 ###Obtener un medico por ID: 
 
-GET https://localhost:3000/medico/2 HTTP/1.1
+GET http://localhost:3000/medico/2 HTTP/1.1
 
 ###Crear un nuevo medico: 
 
-POST https://localhost:3000/medico  HTTP/1.1
+POST http://localhost:3000/medico  HTTP/1.1
 Content-Type: application/json
 
 {
@@ -56,11 +57,12 @@ Content-Type: application/json
 
 ###Eliminar un medico por ID: 
 
-DELETE https://localhost:3000/medico/1  HTTP/1.1
+DELETE http://localhost:3000/medico/3  HTTP/1.1
 
 ###Actualizar el email de un medico por ID: 
 
-PUT https://localhost:3000/medico/1  HTTP/1.1
+PUT http://localhost:3000/medico/2 HTTP/1.1
+
 {
   "mail": "slay@gmail.com"
 }
@@ -69,15 +71,15 @@ PUT https://localhost:3000/medico/1  HTTP/1.1
 
 ###Obtener todos los pacientes: 
 
-GET https://localhost:3000/pacientes HTTP/1.1
+GET http://localhost:3000/pacientes HTTP/1.1
 
 ###Obtener un paciente por ID: 
 
-GET https://localhost:3000/pacientes/1 HTTP/1.1
+GET http://localhost:3000/pacientes/1 HTTP/1.1
 
-###Crear un nuevo paciente: 
+###Crear un nuevo paciente: TIRA ERROR
 
-POST https://localhost:3000/pacientes  HTTP/1.1
+POST http://localhost:3000/pacientes  HTTP/1.1 
 Content-Type: application/json
 
 {
@@ -92,11 +94,12 @@ Content-Type: application/json
 
 ###Eliminar un paciente por ID: 
 
-DELETE https://localhost:3000/pacientes/1  HTTP/1.1
+DELETE http://localhost:3000/pacientes/1  HTTP/1.1
 
 ###Actualizar el email de un paciente por ID: 
 
-PUT https://localhost:3000/pacientes/1  HTTP/1.1
+PUT http://localhost:3000/pacientes/1  HTTP/1.1
+
 {
   "mail": "gobesfren@gmail.com"
 }

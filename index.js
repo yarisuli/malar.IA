@@ -2,8 +2,6 @@ import express from "express";
 const app = express();
 const port = 3000;
 
-import medicos from "./controllers/medicos.js";
-import pacientes from "./controllers/pacientes.js";
 import diagnostico from "./controllers/diagnostico.js";
 import medico from "./controllers/medico.js";
 import paciente from "./controllers/paciente.js";
