@@ -8,9 +8,9 @@ const getMedicos = async (req, res) =>
 
 const getMedico = async (req, res) => 
 {
-    const medicoId = req.params.medicoId;
+    const id = req.params.id;
 
-    const result = await client.query("SELECT * FROM medico WHERE id_medico = $1", [medicoId]);
+    const result = await client.query("SELECT * FROM medico WHERE id_medico = $1", [id]);
     res.json(result.rows); 
 };
 
@@ -31,19 +31,19 @@ const createMedico = async (req, res) =>
 
 const deleteMedico = async (req, res) => 
 {
-    const medicoId = req.params.medicoId;
+    const id = req.params.id;
 
-    const result = await client.query("DELETE FROM medico WHERE id_medico = $1", [medicoId]);
+    const result = await client.query("DELETE FROM medico WHERE id_medico = $1", [id]);
 
     res.send("se eliminó el usuario correctamente.");
 };
 
 const updateMedico = async (req, res) => 
     {
-        const medicoId = req.params.medicoId;
+        const id = req.params.id;
         const mail = req.body.mail;
         
-        const result = await client.query("UPDATE medico SET mail = $1 WHERE id_diag = $2", [mail, medicoId]);
+        const result = await client.query("UPDATE medico SET mail = $1 WHERE id_medico = $2", [mail, id]);
         
         res.send("se actualizó correctamente.");
     };

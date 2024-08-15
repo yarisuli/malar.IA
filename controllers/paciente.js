@@ -8,9 +8,9 @@ const getPacientes = async (req, res) =>
 
 const getPaciente = async (req, res) => 
 {
-    const pacienteId = req.params.pacienteId;
+    const id = req.params.id;
     
-    const result = await client.query("SELECT * FROM paciente WHERE id_paciente = $1", [medicoId]);
+    const result = await client.query("SELECT * FROM paciente WHERE id_paciente = $1", [id]);
     res.json(result.rows); 
 };
 
@@ -18,11 +18,11 @@ const createPaciente = async (req, res) => {
     
     const nombre = req.body.nombre;
     const apellido = req.body.apellido;
-    const nacimiento = req.body.date;
+    const nacimiento = req.body.nacimiento;
     const estado = req.body.estado;
     const mail = req.body.mail;
     const pfp = req.body.pfp;
-    const nombreMedico = req.body.nombreMedico; //chequear como es que REST consigue data de bdd
+    const nombreMedico = req.body.nombreMedico; 
 
     const result = await client.query(`
     INSERT INTO paciente (nombre, apellido, nacimiento, estado, mail, pfp, id_medico)
@@ -33,19 +33,19 @@ const createPaciente = async (req, res) => {
 
 const deletePaciente = async (req, res) => 
 {
-    const pacienteId = req.params.pacienteId;
+    const id = req.params.id;
         
-    const result = await client.query("DELETE FROM paciente WHERE id_paciente = $1", [pacienteId]); 
+    const result = await client.query("DELETE FROM paciente WHERE id_paciente = $1", [id]); 
 
     res.send("se eliminó el paciente correctamente.");
 };
 
 const updatePaciente = async (req, res) => 
     {
-        const pacienteId = req.params.pacienteId;
-        const mail = req.body.mail;
+        const id = req.params.id;
+        const nacimiento = req.body.nacimiento;
         
-        const result = await client.query("UPDATE paciente SET mail = $1 WHERE id_diag = $2", [mail, pacienteId]);
+        const result = await client.query("UPDATE paciente SET nacimiento = $1 WHERE id_paciente = $2", [nacimiento, id]);
         
         res.send("se actualizó correctamente.");
     };

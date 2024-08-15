@@ -21,7 +21,7 @@ app.put("/diagnostico/:id", diagnostico.updateDiagnostico);
 app.delete("/diagnostico/:id", diagnostico.deleteDiagnostico);
 
 //RUTAS MEDICO
-app.get("/medico", medico.getMedico);
+app.get("/medico", medico.getMedicos);
 app.get("/medico/:id", medico.getMedico);
 app.post("/medico", medico.createMedico);
 app.put("/medico/:id", medico.updateMedico);
