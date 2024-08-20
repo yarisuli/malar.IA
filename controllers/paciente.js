@@ -41,14 +41,14 @@ const deletePaciente = async (req, res) =>
 };
 
 const updatePaciente = async (req, res) => 
-    {
-        const id = req.params.id;
-        const nacimiento = req.body.nacimiento;
-        
-        const result = await client.query("UPDATE paciente SET nacimiento = $1 WHERE id_paciente = $2", [nacimiento, id]);
-        
-        res.send("se actualizó correctamente.");
-    };
+{
+    const id = req.params.id;
+    const nacimiento = req.body.nacimiento;
+    
+    const result = await client.query("UPDATE paciente SET nacimiento = $1 WHERE id_paciente = $2", [nacimiento, id]);
+    
+    res.send("se actualizó correctamente.");
+};
 
 const paciente = 
 {

@@ -39,13 +39,13 @@ const deleteMedico = async (req, res) =>
 };
 
 const updateMedico = async (req, res) => 
-    {
-        const id = req.params.id;
-        const mail = req.body.mail;
-        
-        const result = await client.query("UPDATE medico SET mail = $1 WHERE id_medico = $2", [mail, id]);
-        
-        res.send("se actualizó correctamente.");
+{
+    const id = req.params.id;
+    const mail = req.body.mail;
+
+    const result = await client.query("UPDATE medico SET mail = $1 WHERE id_medico = $2", [mail, id]);
+
+    res.send("se actualizó correctamente.");
     };
 const medico =
 {

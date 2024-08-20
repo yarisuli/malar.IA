@@ -37,14 +37,14 @@ const deleteDiagnostico = async (req, res) =>
 };
 
 const updateDiagnostico = async (req, res) => 
-    {
-        const id = req.params.id;
-        const notas = req.body.notas;
+{
+    const id = req.params.id;
+    const notas = req.body.notas;
         
-        const result = await client.query("UPDATE diagnostico SET notas = $1 WHERE id_diag = $2", [notas, id]);
+    const result = await client.query("UPDATE diagnostico SET notas = $1 WHERE id_diag = $2", [notas, id]);
         
-        res.send("se actualizó correctamente.");
-    };
+    res.send("se actualizó correctamente.");
+};
 
 const diagnostico = 
 {
