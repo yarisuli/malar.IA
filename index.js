@@ -14,7 +14,7 @@ app.get("/", (_, res) => {
 
 //RUTAS DIAGNOSTICO
 
-app.get("/diagnostico", diagnostico.getDiagnosticos);
+app.get("/diagnostico:medicoId", diagnostico.getDiagnosticos);
 app.get("/diagnostico/:id", diagnostico.getDiagnostico);
 app.post("/diagnostico", diagnostico.createDiagnostico);
 app.put("/diagnostico/:id", diagnostico.updateDiagnostico);
@@ -28,7 +28,7 @@ app.put("/medico/:id", medico.updateMedico);
 app.delete("/medico/:id", medico.deleteMedico);
 
 //RUTAS PACIENTE
-app.get("/paciente", paciente.getPacientes);
+app.get("/paciente:medicoId", paciente.getPacientes);
 app.get("/paciente/:id", paciente.getPaciente);
 app.post("/paciente", paciente.createPaciente);
 app.put("/paciente/:id", paciente.updatePaciente);

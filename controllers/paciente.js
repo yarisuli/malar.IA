@@ -28,12 +28,12 @@ const createPaciente = async (req, res) => {
     const estado = req.body.estado;
     const mail = req.body.mail;
     const pfp = req.body.pfp;
-    const nombreMedico = req.body.nombreMedico; 
+    const idMedico = req.params.idMedico; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
 
     const result = await client.query(`
     INSERT INTO paciente (nombre, apellido, nacimiento, pais, genero, estado, mail, pfp, id_medico)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8 (SELECT id_medico FROM medico WHERE medico.nombre = $9))`,
-    [nombre, apellido, nacimiento, estado, pais, genero, mail, pfp, nombreMedico]); 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9`,
+    [nombre, apellido, nacimiento, estado, pais, genero, mail, pfp, idMedico]); 
 
     res.send("Se creó el paciente correctamente.");
 };
