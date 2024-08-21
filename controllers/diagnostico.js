@@ -1,8 +1,11 @@
 import { client } from "../db.js";
 
 const getDiagnosticos = async (req, res) => 
-{
-    const result = await client.query("SELECT * FROM diagnostico");
+{   
+    const idMedico = req.params.idMedico; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
+
+    const result = await client.query("SELECT * FROM diagnostico WHERE id_medico = $1", [idMedico]);
+
     res.json(result.rows); 
 };
 
@@ -30,9 +33,9 @@ const createDiagnostico = async (req, res) =>
 const deleteDiagnostico = async (req, res) => 
 {
     const id = req.params.id;
-    
+
     const result = await client.query("DELETE FROM diagnostico WHERE id_diag = $1", [id]);
-    
+
     res.send("Se eliminó el diagnóstico correctamente.");
 };
 
@@ -40,9 +43,9 @@ const updateDiagnostico = async (req, res) =>
 {
     const id = req.params.id;
     const notas = req.body.notas;
-        
+
     const result = await client.query("UPDATE diagnostico SET notas = $1 WHERE id_diag = $2", [notas, id]);
-        
+
     res.send("Se actualizó el diagnóstico correctamente.");
 };
 

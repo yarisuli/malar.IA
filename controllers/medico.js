@@ -3,6 +3,7 @@ import { client } from "../db.js";
 const getMedicos = async (req, res) => 
 {
     const result = await client.query("SELECT * FROM medico");
+
     res.json(result.rows); 
 };
 
@@ -11,6 +12,7 @@ const getMedico = async (req, res) =>
     const id = req.params.id;
 
     const result = await client.query("SELECT * FROM medico WHERE id_medico = $1", [id]);
+
     res.json(result.rows); 
 };
 
@@ -46,7 +48,7 @@ const updateMedico = async (req, res) =>
     const result = await client.query("UPDATE medico SET mail = $1 WHERE id_medico = $2", [mail, id]);
 
     res.send("Se actualizó el usuario correctamente.");
-    };
+};
 const medico =
 {
     getMedicos,
