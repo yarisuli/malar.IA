@@ -26,7 +26,7 @@ const createMedico = async (req, res) =>
     const result = await client.query(`INSERT INTO medico (mail, telefono, contra, nombre, apellido, pfp)
     VALUES ($1, $2, $3, $4, $5, $6)`, [mail, telefono, contra, nombre, apellido, pfp]); 
 
-    res.send("se creó el usuario correctamente.");
+    res.send("Se creó el usuario correctamente.");
 };
 
 const deleteMedico = async (req, res) => 
@@ -35,7 +35,7 @@ const deleteMedico = async (req, res) =>
 
     const result = await client.query("DELETE FROM medico WHERE id_medico = $1", [id]);
 
-    res.send("se eliminó el usuario correctamente.");
+    res.send("Se eliminó el usuario correctamente.");
 };
 
 const updateMedico = async (req, res) => 
@@ -45,7 +45,7 @@ const updateMedico = async (req, res) =>
 
     const result = await client.query("UPDATE medico SET mail = $1 WHERE id_medico = $2", [mail, id]);
 
-    res.send("se actualizó correctamente.");
+    res.send("Se actualizó el usuario correctamente.");
     };
 const medico =
 {

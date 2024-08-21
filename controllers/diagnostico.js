@@ -24,7 +24,7 @@ const createDiagnostico = async (req, res) =>
     const result = await client.query(`INSERT INTO diagnostico (foto, analisis_ia, notas, id_paciente)  
     VALUES ($1, $2, $3, (SELECT id_paciente FROM paciente WHERE paciente.nombre = $4))`, [foto, analisisIA, notas, nombrePaciente]);
 
-    res.send("se creó el diagnóstico correctamente.");
+    res.send("Se creó el diagnóstico correctamente.");
 };
 
 const deleteDiagnostico = async (req, res) => 
@@ -33,7 +33,7 @@ const deleteDiagnostico = async (req, res) =>
     
     const result = await client.query("DELETE FROM diagnostico WHERE id_diag = $1", [id]);
     
-    res.send("se eliminó el diagnóstico correctamente.");
+    res.send("Se eliminó el diagnóstico correctamente.");
 };
 
 const updateDiagnostico = async (req, res) => 
@@ -43,7 +43,7 @@ const updateDiagnostico = async (req, res) =>
         
     const result = await client.query("UPDATE diagnostico SET notas = $1 WHERE id_diag = $2", [notas, id]);
         
-    res.send("se actualizó correctamente.");
+    res.send("Se actualizó el diagnóstico correctamente.");
 };
 
 const diagnostico = 

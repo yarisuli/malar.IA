@@ -28,7 +28,7 @@ const createPaciente = async (req, res) => {
     INSERT INTO paciente (nombre, apellido, nacimiento, estado, mail, pfp, id_medico)
     VALUES ($1, $2, $3, $4, $5, $6, (SELECT id_medico FROM medico WHERE medico.nombre = $7))`, [nombre, apellido, nacimiento, estado, mail, pfp, nombreMedico]); 
 
-    res.send("se creó el paciente correctamente.");
+    res.send("Se creó el paciente correctamente.");
 };
 
 const deletePaciente = async (req, res) => 
@@ -37,7 +37,7 @@ const deletePaciente = async (req, res) =>
         
     const result = await client.query("DELETE FROM paciente WHERE id_paciente = $1", [id]); 
 
-    res.send("se eliminó el paciente correctamente.");
+    res.send("Se eliminó el paciente correctamente.");
 };
 
 const updatePaciente = async (req, res) => 
@@ -47,7 +47,7 @@ const updatePaciente = async (req, res) =>
     
     const result = await client.query("UPDATE paciente SET nacimiento = $1 WHERE id_paciente = $2", [nacimiento, id]);
     
-    res.send("se actualizó correctamente.");
+    res.send("Se actualizó el paciente correctamente.");
 };
 
 const paciente = 
