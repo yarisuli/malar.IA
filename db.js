@@ -16,5 +16,5 @@ export const client = new Client({
 });
 
 client.connect()
-    .then(() => console.log('Conectado a la base de datos'))
-    .catch(err => console.error('Error al conectar a la base de datos', err));
+    .then(() => console.log('Se conectó correctamente a la Base de Datos.'))
+    .catch(err => console.error('Error al conectar con la Base de Datos.', err));

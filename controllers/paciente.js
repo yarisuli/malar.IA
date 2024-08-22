@@ -4,7 +4,7 @@ const getPacientes = async (req, res) =>
 {
     const idMedico = req.params.idMedico; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
 
-    const result = await client.query("SELECT * FROM paciente WHERE id_medico = $1", [idMedico]);
+    getPacientes_service(idMedico);
 
     res.json(result.rows); 
 };
@@ -13,7 +13,7 @@ const getPaciente = async (req, res) =>
 {
     const id = req.params.id;
 
-    const result = await client.query("SELECT * FROM paciente WHERE id_paciente = $1", [id]);
+    getPaciente_service(id);
 
     res.json(result.rows); 
 };
@@ -30,10 +30,7 @@ const createPaciente = async (req, res) => {
     const pfp = req.body.pfp;
     const idMedico = req.params.idMedico; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
 
-    const result = await client.query(`
-    INSERT INTO paciente (nombre, apellido, nacimiento, pais, genero, estado, mail, pfp, id_medico)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9`,
-    [nombre, apellido, nacimiento, estado, pais, genero, mail, pfp, idMedico]); 
+    createPaciente_service(nombre, apellido, nacimiento, estado, pais, genero, mail, pfp, idMedico);
 
     res.send("Se creó el paciente correctamente.");
 };
@@ -42,7 +39,7 @@ const deletePaciente = async (req, res) =>
 {
     const id = req.params.id;
 
-    const result = await client.query("DELETE FROM paciente WHERE id_paciente = $1", [id]); 
+    deletePaciente_service(id); 
 
     res.send("Se eliminó el paciente correctamente.");
 };
@@ -52,8 +49,7 @@ const updatePaciente = async (req, res) =>
     const id = req.params.id;
     const nacimiento = req.body.nacimiento;
 
-    const result = await client.query("UPDATE paciente SET nacimiento = $1 WHERE id_paciente = $2", [nacimiento, id]);
-
+    updatePaciente_service(id, nacimiento)
     res.send("Se actualizó el paciente correctamente.");
 };
 
