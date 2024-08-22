@@ -88,7 +88,6 @@ Content-Type: application/json
 ### PACIENTES!!!
 
 ###Obtener todos los pacientes que le pertenezcan al medico: (HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): 
- 
 
 GET http://localhost:3000/paciente/9 HTTP/1.1
 

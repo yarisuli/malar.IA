@@ -1,9 +1,10 @@
-//import { client } from "../db.js";
+import { client } from "../db.js";
+import medicoService from "../services/medico.service.js";
 
 //NO SIRVE PARA WEB, SIRVE PARA MI
 const getMedicos = async (req, res) => 
 {
-    getMedicos_service();
+    const result = await medicoService.getMedicos();
 
     res.json(result.rows); 
 };
@@ -12,7 +13,7 @@ const getMedico = async (req, res) =>
 {
     const id = req.params.id;
 
-    getMedico_service(id);
+    const result = await medicoService.getMedico(id);
 
     res.json(result.rows); 
 };
@@ -26,7 +27,7 @@ const createMedico = async (req, res) =>
     const apellido = req.body.apellido;
     const pfp = req.body.pfp;
 
-    createMedico_service(mail, telefono, contra, nombre, apellido, pfp); 
+    medicoService.createMedico(mail, telefono, contra, nombre, apellido, pfp); 
 
     res.send("Se creó el usuario correctamente.");
 };
@@ -35,7 +36,7 @@ const deleteMedico = async (req, res) =>
 {
     const id = req.params.id;
 
-    deleteMedico_service(id);
+    medicoService.deleteMedico(id);
 
     res.send("Se eliminó el usuario correctamente.");
 };
@@ -45,7 +46,7 @@ const updateMedico = async (req, res) =>
     const id = req.params.id;
     const mail = req.body.mail;
 
-    updateMedico_service(id, mail);
+    medicoService.updateMedico(id, mail);
 
     res.send("Se actualizó el usuario correctamente.");
 };

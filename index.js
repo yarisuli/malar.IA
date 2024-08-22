@@ -14,7 +14,7 @@ app.get("/", (_, res) => {
 
 //RUTAS DIAGNOSTICO
 
-app.get("/diagnostico:medicoId", diagnostico.getDiagnosticos);
+app.get("/diagnostico/:medicoId", diagnostico.getDiagnosticos);
 app.get("/diagnostico/:id", diagnostico.getDiagnostico);
 app.post("/diagnostico", diagnostico.createDiagnostico);
 app.put("/diagnostico/:id", diagnostico.updateDiagnostico);
