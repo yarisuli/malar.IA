@@ -12,7 +12,7 @@ const getDiagnosticos = async (req, res) => {
 const getDiagnostico = async (req, res) => {
     const id = req.params.id;
 
-    const result = await diagnosticoService.getDiagnostico(id)
+    const result = await diagnosticoService.getDiagnostico(id);
 
     res.json(result.rows);
 };

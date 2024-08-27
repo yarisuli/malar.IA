@@ -2,9 +2,9 @@ import express from "express";
 const app = express();
 const port = 3000;
 
-import diagnostico from "./controllers/diagnostico.js";
-import medico from "./controllers/medico.js";
-import paciente from "./controllers/paciente.js";
+import diagnosticoRouter from "./routes/diagnostico.router.js"
+import medicoRouter from "./routes/medico.router.js"
+import pacienteRouter from "./routes/paciente.router.js"
 
 app.use(express.json());
 
@@ -12,27 +12,14 @@ app.get("/", (_, res) => {
     res.send("malar.IA API working!");
 });
 
-//RUTAS DIAGNOSTICO
+//ROUTER DIAGNOSTICO
+app.use("/diagnostico", diagnosticoRouter);
 
-app.get("/diagnostico/:medicoId", diagnostico.getDiagnosticos);
-app.get("/diagnostico/:id", diagnostico.getDiagnostico);
-app.post("/diagnostico", diagnostico.createDiagnostico);
-app.put("/diagnostico/:id", diagnostico.updateDiagnostico);
-app.delete("/diagnostico/:id", diagnostico.deleteDiagnostico);
+//ROUTER MEDICO
+app.use("/medico", medicoRouter);
 
-//RUTAS MEDICO
-app.get("/medico", medico.getMedicos);
-app.get("/medico/:id", medico.getMedico);
-app.post("/medico", medico.createMedico);
-app.put("/medico/:id", medico.updateMedico);
-app.delete("/medico/:id", medico.deleteMedico);
-
-//RUTAS PACIENTE
-app.get("/paciente:medicoId", paciente.getPacientes);
-app.get("/paciente/:id", paciente.getPaciente);
-app.post("/paciente", paciente.createPaciente);
-app.put("/paciente/:id", paciente.updatePaciente);
-app.delete("/paciente/:id", paciente.deletePaciente);
+//ROUTER PACIENTE
+app.use("/paciente", pacienteRouter);
 
 
 app.listen(port, () => {
