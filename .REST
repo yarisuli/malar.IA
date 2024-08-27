@@ -4,9 +4,9 @@
 
 GET http://localhost:3000/diagnostico/9 HTTP/1.1
 
-###Obtener un diagnostico por ID: 
+###Obtener un diagnostico por ID: NO FUNCA!!!!
 
-GET http://localhost:3000/diagnostico/6 HTTP/1.1
+GET http://localhost:3000/diagnostico/8 HTTP/1.1
 
 ###Crear un nuevo diagnostico (VER COMO VA A SER TEMA ASIGNACION PACIENTE): 
 
@@ -56,7 +56,7 @@ GET http://localhost:3000/medico HTTP/1.1
 ###Obtener un medico por ID: (HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): 
 
 
-GET http://localhost:3000/medico/5 HTTP/1.1
+GET http://localhost:3000/medico/9 HTTP/1.1
 
 ###Crear un nuevo medico: 
 
@@ -93,7 +93,7 @@ GET http://localhost:3000/paciente/9 HTTP/1.1
 
 ###Obtener un paciente por ID: 
 
-GET http://localhost:3000/paciente/4 HTTP/1.1
+GET http://localhost:3000/paciente/9 HTTP/1.1
 
 ###Crear un nuevo paciente: (EN VEZ DE NOMBRE MEDICO, HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): 
 
