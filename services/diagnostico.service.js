@@ -1,6 +1,6 @@
 import { client } from "../db.js";
 
-const getDiagnosticos = async (idMedico) => {
+const getMedicoDiagnosticos = async (idMedico) => {
 
     const result = await client.query(`
     SELECT diagnostico.* FROM diagnostico 
@@ -51,7 +51,7 @@ const updateDiagnostico = async (id, idPaciente) => {
 
 export default {
     getDiagnostico,
-    getDiagnosticos,
+    getMedicoDiagnosticos,
     createDiagnostico,
     deleteDiagnostico,
     updateDiagnostico

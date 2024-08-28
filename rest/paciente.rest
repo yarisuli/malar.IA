@@ -1,0 +1,39 @@
+### PACIENTES!!!
+
+###Obtener todos los pacientes que le pertenezcan al medico: (HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): 
+
+GET http://localhost:3000/paciente/9 HTTP/1.1
+
+###Obtener un paciente por ID: 
+
+GET http://localhost:3000/paciente/9 HTTP/1.1
+
+###Crear un nuevo paciente: (EN VEZ DE NOMBRE MEDICO, HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): 
+
+POST http://localhost:3000/paciente  HTTP/1.1 
+Content-Type: application/json
+
+{
+  "nombre": "Jason",
+  "apellido": "Tatum",
+  "nacimiento": "2000-05-04T03:00:00.000Z",
+  "pais": "Argentina",
+  "genero": "masculino",
+  "estado": "enfermo",
+  "mail": "celtics@gmail.com",
+  "pfp": "urlperomedafiacaescribir",
+  "nombreMedico": "Fernando" 
+}
+
+###Eliminar un paciente por ID: 
+
+DELETE http://localhost:3000/paciente/4  HTTP/1.1
+
+###Actualizar el email de un paciente por ID:
+
+PUT http://localhost:3000/paciente/9  HTTP/1.1 
+Content-Type: application/json
+
+{
+  "nacimiento": "2000-05-04T03:00:00.000Z",
+}

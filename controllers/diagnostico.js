@@ -1,15 +1,16 @@
-import { client } from "../db.js";
 import diagnosticoService from "../services/diagnostico.service.js";
 
-const getDiagnosticos = async (req, res) => {
+const getMedicoDiagnosticos = async (req, res) => {
+    
     const idMedico = req.params.idMedico; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
 
-    const result = await diagnosticoService.getDiagnosticos(idMedico);
+    const result = await diagnosticoService.getMedicoDiagnosticos(idMedico);
 
     res.json(result.rows);
 };
 
 const getDiagnostico = async (req, res) => {
+
     const id = req.params.id;
 
     const result = await diagnosticoService.getDiagnostico(id);
@@ -17,7 +18,6 @@ const getDiagnostico = async (req, res) => {
     res.json(result.rows);
 };
 
-//EJEMPLO CON SERVICE
 const createDiagnostico = async (req, res) => {
     const foto = req.body.foto;
     const analisisIA = req.body.analisisIA;
@@ -48,7 +48,7 @@ const updateDiagnostico = async (req, res) => {
 
 const diagnostico =
 {
-    getDiagnosticos,
+    getMedicoDiagnosticos,
     getDiagnostico,
     createDiagnostico,
     deleteDiagnostico,

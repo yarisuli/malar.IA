@@ -20,6 +20,7 @@
   "homepage": "https://github.com/yarisuli/malar.IA#readme",
   "dependencies": {
     "dotenv": "^16.4.5",
+    "env": "^0.0.2",
     "express": "^4.19.2",
     "pg": "^8.12.0"
   }
