@@ -3,7 +3,7 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/:idMedico", paciente.getPacientes);
+router.get("/medico/:idMedico", paciente.getPacientes);
 router.get("/:id", paciente.getPaciente);
 router.post("", paciente.createPaciente);
 router.put("/:id", paciente.updatePaciente);
