@@ -2,38 +2,43 @@
 
 ###Obtener todos los pacientes que le pertenezcan al medico: (HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): 
 
-GET http://localhost:3000/paciente/medico/9 HTTP/1.1
+GET http://localhost:3000/paciente/medico/1 HTTP/1.1
 
 ###Obtener un paciente por ID: 
 
-GET http://localhost:3000/paciente/11 HTTP/1.1
+GET http://localhost:3000/paciente/1 HTTP/1.1
 
 ###Crear un nuevo paciente: (EN VEZ DE NOMBRE MEDICO, HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): 
 
-POST http://localhost:3000/paciente  HTTP/1.1 
+POST http://localhost:3000/paciente HTTP/1.1 
 Content-Type: application/json
 
 {
-  "nombre": "Jason",
-  "apellido": "Tatum",
-  "nacimiento": "2000-05-04T03:00:00.000Z",
-  "pais": "Argentina",
-  "genero": "masculino",
-  "estado": "enfermo",
-  "mail": "celtics@gmail.com",
-  "pfp": "urlperomedafiacaescribir",
-  "nombreMedico": "Fernando" 
+
+  "nombre": "Arnoldo",
+  "apellido": "Alfredo", 
+  "nacimiento": 2007-12-07,
+  "sexo": "male",
+  "dni": 47582724,
+  "pais": "Argentina", 
+  "ocupacion": "psychic",
+  "numero": 1132465476,
+  "mail": "arnoldostu@gmail.com", 
+  "instruccion": "primary",
+  "pfp": "pfpperomedafiacaescribir",
+  "idMedico": 1
+
 }
 
 ###Eliminar un paciente por ID: 
 
-DELETE http://localhost:3000/paciente/11  HTTP/1.1
+DELETE http://localhost:3000/paciente/1  HTTP/1.1
 
 ###Actualizar el email de un paciente por ID:
 
-PUT http://localhost:3000/paciente/10  HTTP/1.1 
+PUT http://localhost:3000/paciente/1 HTTP/1.1 
 Content-Type: application/json
 
 {
-  "nacimiento": "2000-05-04T03:00:00.000Z"
+  "nacimiento": "2000-05-04"
 }

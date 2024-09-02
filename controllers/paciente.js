@@ -3,7 +3,7 @@ import pacienteService from "../services/paciente.service.js";
 
 const getPacientes = async (req, res) => 
 {
-    const idMedico = req.params.idMedico; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
+    const idMedico = 1; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
 
     const result = await pacienteService.getPacientes(idMedico);
 
@@ -24,14 +24,17 @@ const createPaciente = async (req, res) => {
     const nombre = req.body.nombre;
     const apellido = req.body.apellido;
     const nacimiento = req.body.nacimiento;
+    const sexo = req.body.sexo;
+    const dni = req.body.dni;
     const pais = req.body.pais;
-    const genero = req.body.genero;
-    const estado = req.body.estado;
+    const ocupacion = req.body.ocupacion;
+    const numero = req.body.numero;
     const mail = req.body.mail;
+    const instruccion = req.body.instruccion;
     const pfp = req.body.pfp;
     const idMedico = req.params.idMedico; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
 
-    pacienteService.createPaciente(nombre, apellido, nacimiento, estado, pais, genero, mail, pfp, idMedico);
+    pacienteService.createPaciente(nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp, idMedico);
 
     res.send("Se creó el paciente correctamente.");
 };

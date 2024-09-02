@@ -2,11 +2,11 @@
 
 ###Obtener todos los diagnosticos del doctor: 
 
-GET http://localhost:3000/diagnostico/medico/9 HTTP/1.1
+GET http://localhost:3000/diagnostico/medico/1 HTTP/1.1
 
 ###Obtener un diagnostico por ID: 
 
-GET http://localhost:3000/diagnostico/10 HTTP/1.1
+GET http://localhost:3000/diagnostico/1 HTTP/1.1
 
 ###Crear un nuevo diagnostico (VER COMO VA A SER TEMA ASIGNACION PACIENTE): 
 
@@ -23,15 +23,15 @@ Content-Type: application/json
 
 ###Eliminar un diagnostico por ID: 
 
-DELETE http://localhost:3000/diagnostico/9  HTTP/1.1
+DELETE http://localhost:3000/diagnostico/1  HTTP/1.1
 
 ###Actualizar las notas de un diagnostico por ID: 
 
-PUT http://localhost:3000/diagnostico/10  HTTP/1.1
+PUT http://localhost:3000/diagnostico/1  HTTP/1.1
 Content-Type: application/json
 
 {
-  "id_paciente": 10 
+  "id_paciente": 2
 }
 
 

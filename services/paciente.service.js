@@ -18,12 +18,12 @@ const getPaciente = async (id) => {
 
 }
 
-const createPaciente = async (nombre, apellido, nacimiento, estado, pais, genero, mail, pfp, idMedico) => {
+const createPaciente = async (nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp, idMedico) => {
 
     const result = await client.query(`
-    INSERT INTO paciente (nombre, apellido, nacimiento, pais, genero, estado, mail, pfp, id_medico)
-    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
-    [nombre, apellido, nacimiento, estado, pais, genero, mail, pfp, idMedico]); 
+    INSERT INTO paciente (nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp, id_medico) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
+    [nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp, idMedico]); 
 
     return result;
 
