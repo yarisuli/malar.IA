@@ -2,7 +2,7 @@
 
 ###Obtener todos los pacientes que le pertenezcan al medico: (HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): 
 
-GET http://localhost:3000/paciente/medico/1 HTTP/1.1
+GET http://localhost:3000/paciente/medico HTTP/1.1
 
 ###Obtener un paciente por ID: 
 
