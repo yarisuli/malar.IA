@@ -1,4 +1,4 @@
-import diagnostico from "../controllers/diagnostico.js";
+import diagnostico from "../controllers/diagnostico.controller.js";
 import { Router } from "express";
 
 const router = Router();

@@ -10,10 +10,19 @@ const getMedicos = async () => {
 
 }
 
-const getMedico = async (id) => {
+const getMedicoById = async (id) => {
 
     const result = await client.query(`
     SELECT * FROM medico WHERE id_medico = $1`, [id]);
+
+    return result;
+
+}
+
+const getMedicoByMail = async (mail) => {
+
+    const result = await client.query(`
+    SELECT * FROM medico WHERE mail = $1`, [mail]);
 
     return result;
 
@@ -49,7 +58,8 @@ const updateMedico = async (id, mail) => {
 
 export default {
     getMedicos,
-    getMedico,
+    getMedicoById,
+    getMedicoByMail,
     createMedico, 
     deleteMedico,
     updateMedico

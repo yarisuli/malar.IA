@@ -32,7 +32,7 @@ const createPaciente = async (req, res) => {
     const mail = req.body.mail;
     const instruccion = req.body.instruccion;
     const pfp = req.body.pfp;
-    const idMedico = req.params.idMedico; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
+    const idMedico = req.id; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
 
     pacienteService.createPaciente(nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp, idMedico);
 

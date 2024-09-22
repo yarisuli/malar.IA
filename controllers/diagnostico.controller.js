@@ -2,7 +2,7 @@ import diagnosticoService from "../services/diagnostico.service.js";
 
 const getMedicoDiagnosticos = async (req, res) => {
     
-    const idMedico = req.params.idMedico; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
+    const idMedico = req.id; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
 
     const result = await diagnosticoService.getMedicoDiagnosticos(idMedico);
 

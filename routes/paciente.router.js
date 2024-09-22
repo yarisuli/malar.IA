@@ -1,4 +1,4 @@
-import paciente from "../controllers/paciente.js";
+import paciente from "../controllers/paciente.controller.js";
 import { Router } from "express";
 
 const router = Router();

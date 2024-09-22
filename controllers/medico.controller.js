@@ -9,14 +9,23 @@ const getMedicos = async (req, res) =>
     res.json(result.rows); 
 };
 
-const getMedico = async (req, res) => 
+const getMedicoById = async (req, res) => 
 {
     const id = req.params.id;
 
-    const result = await medicoService.getMedico(id);
+    const result = await medicoService.getMedicoById(id);
 
     res.json(result.rows); 
 };
+
+const getMedicoByMail = async (req, res) => 
+    {
+        const mail = req.body.mail;
+    
+        const result = await medicoService.getMedicoByMail(mail);
+    
+        res.json(result.rows); 
+    };
 
 const createMedico = async (req, res) => 
 {
@@ -53,7 +62,8 @@ const updateMedico = async (req, res) =>
 const medico =
 {
     getMedicos,
-    getMedico,
+    getMedicoById,
+    getMedicoByMail,
     createMedico, 
     deleteMedico,
     updateMedico
