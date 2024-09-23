@@ -12,7 +12,7 @@ const register = async (req, res) => {
     if (!medico)
         return res.status(400).json({ message: "Se necesita un medico." });
 
-    if (!medico.nombre || !medico.apellido || !medico.mail || !medico.contra || !medico.numero)
+    if (!medico.mail || !medico.telefono || !medico.contra || !medico.nombre || !medico.numero || !medico.apellido)
         return res.status(400).json({ message: "Faltan campos por llenar." });
 
     try {
