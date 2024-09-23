@@ -37,7 +37,6 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
 
-
     const mail = req.body.mail;
     const contra = req.body.contra;
 

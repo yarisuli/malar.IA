@@ -22,7 +22,7 @@ const createDiagnostico = async (req, res) => {
     const foto = req.body.foto;
     const analisisIA = req.body.analisisIA;
     const notas = req.body.notas;
-    const idPaciente = req.params.idPaciente
+    const idPaciente = req.params.idPaciente;
 
     diagnosticoService.createDiagnostico(foto, analisisIA, notas, idPaciente);
 
