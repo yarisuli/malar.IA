@@ -9,6 +9,8 @@ const register = async (req, res) => {
     const mail = req.body.mail;
     const saltRounds = 10;
 
+    console.log(medico);
+
     if (!medico)
         return res.status(400).json({ message: "Se necesita un medico." });
 
@@ -17,7 +19,6 @@ const register = async (req, res) => {
 
     try {
         const medicoExistente = await MedicoService.getMedicoByMail(mail);
-        console.log(medicoExistente);
 
         if (medicoExistente)
             return res.status(400).json({ message: "Ya existe un medico con este mail." });
