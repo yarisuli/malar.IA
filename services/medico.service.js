@@ -20,13 +20,13 @@ const getMedicoById = async (id) => {
 }
 
 const getMedicoByMail = async (mail) => {
-
+    
     const result = await client.query(`
     SELECT * FROM medico WHERE mail = $1`, [mail]);
 
-    return result;
-
+    return result.rows[0]; 
 }
+
 
 const createMedico = async (mail, telefono, contra, nombre, apellido, pfp) => {
 

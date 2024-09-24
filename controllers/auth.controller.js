@@ -12,11 +12,12 @@ const register = async (req, res) => {
     if (!medico)
         return res.status(400).json({ message: "Se necesita un medico." });
 
-    if (!medico.mail || !medico.telefono || !medico.contra || !medico.nombre || !medico.numero || !medico.apellido)
+    if (!medico.mail || !medico.telefono || !medico.contra || !medico.nombre || !medico.apellido)
         return res.status(400).json({ message: "Faltan campos por llenar." });
 
     try {
         const medicoExistente = await MedicoService.getMedicoByMail(mail);
+        console.log(medicoExistente);
 
         if (medicoExistente)
             return res.status(400).json({ message: "Ya existe un medico con este mail." });
