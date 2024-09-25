@@ -12,7 +12,7 @@ const getMedicos = async () => {
 
 const getMedicoById = async (id) => {
 
-    const result = await client.query(`
+    const { result } = await client.query(`
     SELECT * FROM medico WHERE id_medico = $1`, [id]);
 
     return result;
@@ -20,23 +20,44 @@ const getMedicoById = async (id) => {
 }
 
 const getMedicoByMail = async (mail) => {
-    
-    const result = await client.query(`
-    SELECT * FROM medico WHERE mail = $1`, [mail]);
+    try {
+        const result = await client.query(`
+        SELECT * FROM medico WHERE mail = $1`, [mail]);
 
-    return result.rows[0]; 
+        if (result.rows.length < 1) return null;
+        
+        return result.rows[0]; 
+
+    } catch (error) {
+        throw error;
+    }
 }
 
+
+
+// const createMedico = async (mail, telefono, contra, nombre, apellido, pfp) => {
+
+//     const result = await client.query(`
+//     INSERT INTO medico (mail, telefono, contra, nombre, apellido, pfp)
+//     VALUES ($1, $2, $3, $4, $5, $6)`, [mail, telefono, contra, nombre, apellido, pfp]); 
+
+//     return result;
+
+// }
 
 const createMedico = async (mail, telefono, contra, nombre, apellido, pfp) => {
+    try {
+        const result = await client.query(`
+            INSERT INTO medico (mail, telefono, contra, nombre, apellido, pfp)
+            VALUES ($1, $2, $3, $4, $5, $6)`, [mail, telefono, contra, nombre, apellido, pfp]); 
 
-    const result = await client.query(`
-    INSERT INTO medico (mail, telefono, contra, nombre, apellido, pfp)
-    VALUES ($1, $2, $3, $4, $5, $6)`, [mail, telefono, contra, nombre, apellido, pfp]); 
+        return result;
 
-    return result;
+    } catch (error) {
+        throw error; 
+    }
+};
 
-}
 
 const deleteMedico = async (id) => {
 

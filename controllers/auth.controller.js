@@ -3,18 +3,10 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 const register = async (req, res) => {
-
-    const medico = req.body;
-    const contra = req.body.contra;
-    const mail = req.body.mail;
+    const { nombre, apellido, mail, telefono, contra, pfp } = req.body;  // Extraemos pfp si existe (puede ser null)
     const saltRounds = 10;
 
-    console.log(medico);
-
-    if (!medico)
-        return res.status(400).json({ message: "Se necesita un medico." });
-
-    if (!medico.mail || !medico.telefono || !medico.contra || !medico.nombre || !medico.apellido)
+    if (!mail || !telefono || !contra || !nombre || !apellido)
         return res.status(400).json({ message: "Faltan campos por llenar." });
 
     try {
@@ -25,17 +17,16 @@ const register = async (req, res) => {
 
         const salt = await bcrypt.genSalt(saltRounds);
         const hash = await bcrypt.hash(contra, salt);
-        console.log(hash); 
 
-        medico.contra = hash;
+        await MedicoService.createMedico(mail, telefono, hash, nombre, apellido, pfp);
 
-        await MedicoService.createMedico(medico);
         res.status(201).json({ message: "Medico creado con éxito." });
 
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 const login = async (req, res) => {
 
