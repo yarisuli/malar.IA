@@ -28,45 +28,6 @@ const register = async (req, res) => {
 };
 
 
-// const login = async (req, res) => {
-
-//     const mail = req.body.mail;
-//     const contra = req.body.contra;
-
-//     if (!mail || !contra) 
-//         return res.status(400).json({ message: "Se necesita un mail y una contraseña." });
-
-//     try {  
-
-//         const medicoExistente = await MedicoService.getMedicoByMail(mail);
-
-//         if (!medicoExistente)
-//             return res.status(404).json({ message: "Medico con mail no encontrado." });
-
-//         const match = await bcrypt.compare(contra, medicoExistente.contra);
-
-//         if (!match)
-//             return res.status(400).json({ message: message.error });
-
-//         const token = await jwt.sign({ id: medicoExistente.id }, "secret", { expiresIn: "30m" });
-        
-//         console.log(token); 
-//         console.log(medicoExistente.id);
-        
-//         return res.status(200).json({ usuario: {
-//             id: medicoExistente.id,
-//             mail: medicoExistente.mail,
-//             nombre: medicoExistente.nombre,
-//             apellido: medicoExistente.apellido,
-//             numero: medicoExistente.numero,
-//         }, token });
-
-//     } catch (error) {
-//         res.status(500).json({ message: error.message });
-//     }
-
-// };
-
 const login = async (req, res) => {
     const mail = req.body.mail;
     const contra = req.body.contra;

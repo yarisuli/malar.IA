@@ -26,7 +26,7 @@ const createDiagnostico = async (foto, analisisIA, notas, idPaciente) => {
     const result = await client.query(`
     INSERT INTO diagnostico (foto, analisis_ia, notas, id_paciente) 
     VALUES ($1, $2, $3, $4)`, [foto, analisisIA, notas, idPaciente]);
-
+    
     return result;
 
 }
@@ -49,10 +49,18 @@ const updateDiagnostico = async (id, idPaciente) => {
 
 }
 
+const postImagen = async (idPaciente, imageUrl) => {
+    const result = await client.query(
+    `INSERT INTO diagnostico (foto, id_paciente) VALUES ($1, $2)`, [idPaciente, imageUrl]);
+
+    return result;
+}
+
 export default {
     getDiagnostico,
     getMedicoDiagnosticos,
     createDiagnostico,
     deleteDiagnostico,
-    updateDiagnostico
+    updateDiagnostico, 
+    postImagen
 }

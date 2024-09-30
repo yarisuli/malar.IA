@@ -1,4 +1,5 @@
 import diagnosticoService from "../services/diagnostico.service.js";
+import fs from "fs";
 
 const getMedicoDiagnosticos = async (req, res) => {
     
@@ -19,14 +20,37 @@ const getDiagnostico = async (req, res) => {
 };
 
 const createDiagnostico = async (req, res) => {
-    const foto = req.body.foto;
-    const analisisIA = req.body.analisisIA;
-    const notas = req.body.notas;
     const idPaciente = req.params.idPaciente;
+    const { analisisIA, notas } = req.body;
+    const foto = req.file.path;
 
-    diagnosticoService.createDiagnostico(foto, analisisIA, notas, idPaciente);
+    if (!analisisIA || !notas || !foto)
+        return res.status(400).json({ message: "Faltan campos por llenar." });
 
-    res.send("Se creó el diagnóstico correctamente.");
+    const extension = foto.split('.').pop().toLowerCase();
+    const extensionesPermitidas = ['pdf', 'png', 'jpeg', 'jpg'];
+
+    if (!extensionesPermitidas.includes(extension)) {
+        console.error("Extensión de archivo no permitida");
+        return res.status(400).json({ error: "Extensión de archivo no permitida. Extensiones admitidas: PDF, PNG, JPEG, y JPG" });
+    }
+
+    const result = await cloudinary.uploader.upload(foto, {
+        folder: 'uploads',
+    });
+    
+    const imageUrl = result.secure_url;
+
+    try {
+        await diagnosticoService.createDiagnostico(imageUrl, analisisIA, notas, idPaciente);
+        fs.unlinkSync(foto);
+
+        res.status(201).json({ message: "Se creó el diagnóstico correctamente." });
+
+    } catch (error) {
+        console.error('Error al crear diagnóstico:', error);
+        res.status(500).json({ error: "Error al crear el diagnóstico." });
+    }
 };
 
 const deleteDiagnostico = async (req, res) => {
@@ -46,6 +70,41 @@ const updateDiagnostico = async (req, res) => {
     res.send("Se actualizó el diagnóstico correctamente.");
 };
 
+const postImagen = async (req, res) => {
+    const idPaciente = req.params.idPaciente;
+    const foto = req.file.path;
+
+    if (!idPaciente || !foto) 
+        return res.status(400).json({ message: "Se necesita un medico y una imagen." });
+
+    const extension = foto.split('.').pop().toLowerCase();
+    const extensionesPermitidas = ['pdf', 'png', 'jpeg', 'jpg'];
+
+    if (!extensionesPermitidas.includes(extension)) {
+        console.error("Extensión de archivo no permitida");
+        return res.status(400).json({ error: "Extensión de archivo no permitida. Extensiones admitidas: PDF, PNG, JPEG, y JPG" });
+    }
+
+    try {
+
+        const result = await cloudinary.uploader.upload(foto, {
+            folder: 'uploads',
+        });
+        
+        const imageUrl = result.secure_url;
+
+
+        await diagnosticoService.postImagen(idPaciente, imageUrl);
+        fs.unlinkSync(foto);
+
+        res.status(201).json({ message: "Se subió la imagen correctamente." });
+
+    } catch (error) {
+        console.error('Error al subir imagen:', error);
+        res.status(500).json({ error: "Error al subir imagen." });
+    }
+}
+
 
 const diagnostico =
 {
@@ -53,7 +112,8 @@ const diagnostico =
     getDiagnostico,
     createDiagnostico,
     deleteDiagnostico,
-    updateDiagnostico
+    updateDiagnostico,
+    postImagen
 };
 
 export default diagnostico;
