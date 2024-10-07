@@ -6,6 +6,9 @@ import diagnosticoRouter from "./routes/diagnostico.router.js"
 import medicoRouter from "./routes/medico.router.js"
 import pacienteRouter from "./routes/paciente.router.js"
 import authRouter from "./routes/auth.router.js"
+import imagesRouter from "./routes/images.router.js"
+
+
 app.use(express.json());
 
 app.get("/", (_, res) => {
@@ -23,6 +26,9 @@ app.use("/paciente", pacienteRouter);
 
 //ROUTER AUTH
 app.use("/auth", authRouter); 
+
+//ROUTER IMAGES
+app.use("/images", imagesRouter);
 
 
 app.listen(port, () => {
