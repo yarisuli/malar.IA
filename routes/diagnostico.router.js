@@ -2,12 +2,15 @@ import diagnostico from "../controllers/diagnostico.controller.js";
 import { verifyAdmin, verifyToken } from "../middlewares/auth.middleware.js";
 import { Router } from "express";
 import multer from 'multer';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+
+const files = fileURLToPath(import.meta.url);
+const uploads = dirname(files);
 
 // Poner la ubicacion de la carpeta de Uploads correspondiente, en este caso se ubica dentro del SRC
-const uploadDir = join(__dirname, "../uploads");
+const uploadDir = join(uploads, "../uploads");
 
 // Se define donde se va a ubicar el archivo que vamos a subir y el nombre, este se puede modificar, en este caso el nombre que se le va a asignar es la fecha de subida sumado del nombre del archivo original
 const storage = multer.diskStorage({
