@@ -40,5 +40,6 @@ const upload = multer({
 const router = Router();
 
 router.post("/subirImagen/:idPaciente", verifyToken, upload.single('file'), images.postImagen);
+router.post("/predict", images.sendURL);
 
 export default router;
