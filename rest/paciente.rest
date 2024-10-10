@@ -1,6 +1,6 @@
 ### PACIENTES!!!
 
-###Obtener todos los pacientes que le pertenezcan al medico: (HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): 
+###Obtener todos los pacientes que le pertenezcan al medico: (HACER EL WHERE ID MEDICO = MEDICO QUE INICIO SESION): MEPA QUE ESTA MAL ESTO! CHEQUEAR
 
 GET http://localhost:3000/paciente/medico HTTP/1.1
 
