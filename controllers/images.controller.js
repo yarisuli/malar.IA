@@ -29,7 +29,7 @@ const postImagen = async (req, res) => {
         await diagnosticoService.postImagen(idPaciente, imageUrl);
         fs.unlinkSync(foto);
 
-        res.status(201).json({ message: "Se subió la imagen correctamente." });
+        res.status(200).json({ message: "Se subió la imagen correctamente." });
 
     } catch (error) {
         console.error('Error al subir imagen:', error);
