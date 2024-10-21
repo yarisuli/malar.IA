@@ -4,7 +4,7 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("", verifyToken, medico.getMedicos);
+router.get("", medico.getMedicos);
 router.get("/:id", verifyToken, medico.getMedicoById);
 router.get("/mail", verifyToken, medico.getMedicoByMail);
 router.post("/", verifyToken, medico.createMedico);
