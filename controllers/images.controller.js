@@ -37,8 +37,12 @@ const postImagen = async (req, res) => {
     }
 }
 
+const sendURL = async (req, res) => {
+
+}
 const imagen = {
-    postImagen
+    postImagen,
+    sendURL
 };
 
 export default imagen;

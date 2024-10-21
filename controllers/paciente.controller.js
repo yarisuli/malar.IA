@@ -3,7 +3,7 @@ import pacienteService from "../services/paciente.service.js";
 
 const getPacientes = async (req, res) => 
 {
-    const idMedico = 1; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
+    const idMedico = req.id; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
 
     const result = await pacienteService.getPacientes(idMedico);
 
