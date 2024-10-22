@@ -12,13 +12,26 @@ const getMedicoDiagnosticos = async (req, res) => {
 };
 
 const getDiagnostico = async (req, res) => {
+    try {
+        const id = req.params.id;
 
-    const id = req.params.id;
+        if (!id) {
+            return res.status(400).json({ error: "Se necesita el ID del diagnóstico." });
+        }
 
-    const result = await diagnosticoService.getDiagnostico(id);
+        const result = await diagnosticoService.getDiagnostico(id);
 
-    res.json(result.rows);
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: "Diagnóstico no encontrado" });
+        }
+
+        res.json(result.rows);
+    } catch (error) {
+        console.error("Error al obtener el diagnóstico:", error);
+        res.status(500).json({ error: "Error interno del servidor" });
+    }
 };
+
 
 const createDiagnostico = async (req, res) => {
     const idPaciente = req.params.idPaciente;

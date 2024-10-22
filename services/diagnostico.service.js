@@ -13,13 +13,17 @@ const getMedicoDiagnosticos = async (idMedico) => {
 }
 
 const getDiagnostico = async (id) => {
+    try {
+        const result = await client.query(`
+            SELECT * FROM diagnostico WHERE id_diag = $1`, [id]);
 
-    const result = await client.query(`
-    SELECT * FROM diagnostico WHERE id_diag = $1`, [id]);
+        return result;
 
-    return result;
-
-}
+    } catch (error) {
+        console.error("Error al obtener el diagnóstico:", error);
+        throw new Error("Error al ejecutar la consulta en la base de datos");
+    }
+};
 
 const createDiagnostico = async (foto, analisisIA, notas, idPaciente) => {
 
