@@ -37,7 +37,7 @@ const createDiagnostico = async (req, res) => {
     const idPaciente = req.params.idPaciente;
     const { analisisIA, notas } = req.body;
 
-    if (!analisisIA || !notas)
+    if (!analisisIA || !notas || !idPaciente)
         return res.status(400).json({ message: "Faltan campos por llenar." });
 
     try {
