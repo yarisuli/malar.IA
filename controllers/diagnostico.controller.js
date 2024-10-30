@@ -3,12 +3,23 @@ import cloudinary from "../upload.js";
 import fs from "fs";
 
 const getMedicoDiagnosticos = async (req, res) => {
-    
     const idMedico = req.id; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
+    console.log(idMedico);
 
-    const result = await diagnosticoService.getMedicoDiagnosticos(idMedico);
+    try {
 
-    res.json(result.rows);
+        const result = await diagnosticoService.getMedicoDiagnosticos(idMedico);
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: "Diagnósticos del medico no encontrados."});
+        }
+
+        res.json(result.rows);
+
+    } catch (error) {
+        console.error("Error al obtener diagnósticos del médico:", error);
+        res.status(500).json({ message: "Error al obtener los diagnósticos del médico." });
+    }
 };
 
 const getDiagnostico = async (req, res) => {

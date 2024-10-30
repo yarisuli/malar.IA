@@ -25,11 +25,11 @@ const getDiagnostico = async (id) => {
     }
 };
 
-const createDiagnostico = async (foto, analisisIA, notas, idPaciente) => {
+const createDiagnostico = async (analisisIA, notas, idPaciente) => {
 
     const result = await client.query(`
-    INSERT INTO diagnostico (foto, analisis_ia, notas, id_paciente) 
-    VALUES ($1, $2, $3, $4)`, [foto, analisisIA, notas, idPaciente]);
+    INSERT INTO diagnostico (analisis_ia, notas, id_paciente) 
+    VALUES ($1, $2, $3)`, [analisisIA, notas, idPaciente]);
     
     return result;
 
