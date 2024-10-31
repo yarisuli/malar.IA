@@ -64,8 +64,9 @@ const login = async (req, res) => {
                 nombre: medicoExistente.nombre,
                 apellido: medicoExistente.apellido,
                 telefono: medicoExistente.telefono, // Cambia aquí para usar telefono
+                token: token
             }, 
-            token 
+            // token
         });
 
     } catch (error) {
