@@ -58,14 +58,14 @@ const login = async (req, res) => {
         
         // Devolver usuario con el id y el teléfono
         return res.status(200).json({
-            usuario: {
+            // usuario: {
                 id: medicoExistente.id_medico, // Cambia aquí para usar id_medico
                 mail: medicoExistente.mail,
                 nombre: medicoExistente.nombre,
                 apellido: medicoExistente.apellido,
                 telefono: medicoExistente.telefono, // Cambia aquí para usar telefono
                 token: token
-            }, 
+            // }, 
             // token
         });
 
