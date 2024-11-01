@@ -43,7 +43,6 @@ const getDiagnostico = async (req, res) => {
     }
 };
 
-
 const createDiagnostico = async (req, res) => {
     const idPaciente = req.params.idPaciente;
     const { analisisIA, notas } = req.body;
