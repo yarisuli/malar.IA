@@ -20,7 +20,7 @@ const postImagen = async (req, res) => {
     try {
 
         const result = await cloudinary.uploader.upload(foto, {
-            folder: '/tmp',
+            folder: 'uploads',
         });
         
         const imageUrl = result.secure_url;
