@@ -40,6 +40,7 @@ const postImagen = async (req, res) => {
 const sendURL = async (req, res) => {
 
 }
+
 const imagen = {
     postImagen,
     sendURL
