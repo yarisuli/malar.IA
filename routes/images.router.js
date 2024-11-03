@@ -10,7 +10,7 @@ const files = fileURLToPath(import.meta.url);
 const uploads = dirname(files);
 
 // Poner la ubicacion de la carpeta de Uploads correspondiente, en este caso se ubica dentro del SRC
-const uploadDir = join(uploads, "../uploads");
+const uploadDir = join(uploads, "/tmp");
 
 // Se define donde se va a ubicar el archivo que vamos a subir y el nombre, este se puede modificar, en este caso el nombre que se le va a asignar es la fecha de subida sumado del nombre del archivo original
 const storage = multer.diskStorage({
