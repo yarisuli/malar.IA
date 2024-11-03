@@ -85,17 +85,18 @@ const deletePaciente = async (req, res) => {
 
 const updatePaciente = async (req, res) => {
     const { id } = req.params;
-    const { nacimiento } = req.body;
+    const { nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp } = req.body;
 
-    if (!id || !nacimiento) {
-        return res.status(400).json({ message: "ID de paciente o campo de nacimiento no proporcionado." });
+    if (!nombre || !apellido || !nacimiento || !sexo || !dni || !pais || !ocupacion || !numero || !mail || !instruccion) {
+        return res.status(400).json({ message: "Falta llenar algun campo." });
     }
 
     try {
 
-        await pacienteService.updatePaciente(id, nacimiento);
+        await pacienteService.updatePaciente(id, nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp );
 
         res.status(200).json({ message: "Se actualizó el paciente correctamente." });
+
     } catch (error) {
         console.error("Error al actualizar el paciente:", error);
         res.status(500).json({ message: "Error al actualizar el paciente." });

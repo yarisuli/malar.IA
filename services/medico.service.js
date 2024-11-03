@@ -1,15 +1,13 @@
 import { client } from "../db.js";
 
-//NO SIRVE PARA WEB, SIRVE PARA MI
 const getMedicos = async () => {
     try {
         const result = await client.query(`
         SELECT * FROM medico`);
-
         return result;
+
     } catch (error) {
         console.error('Error al obtener la lista de médicos:', error);
-
         throw new Error('Error al obtener la lista de médicos desde la base de datos');
     }
 };
@@ -25,6 +23,7 @@ const getMedicoById = async (id) => {
         }
 
         return { rows: [] };
+
     } catch (error) {
         console.error('Error en la consulta de la base de datos:', error);
         throw error; 
@@ -68,6 +67,7 @@ const deleteMedico = async (id) => {
         }
 
         return result;
+
     } catch (error) {
         console.error(`Error al eliminar el médico con ID ${id}:`, error);
 
