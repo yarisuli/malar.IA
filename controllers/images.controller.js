@@ -3,10 +3,10 @@ import cloudinary from "../upload.js";
 import fs from "fs";
 
 const postImagen = async (req, res) => {
-    const idPaciente = req.params.idPaciente;
+    const idMedico = req.id;
     const foto = req.file.path;
 
-    if (!idPaciente || !foto) 
+    if (!idMedico || !foto) 
         return res.status(400).json({ message: "Se necesita un medico y una imagen." });
 
     const extension = foto.split('.').pop().toLowerCase();
@@ -26,7 +26,7 @@ const postImagen = async (req, res) => {
         const imageUrl = result.secure_url;
 
 
-        await diagnosticoService.postImagen(idPaciente, imageUrl);
+        await diagnosticoService.postImagen(idMedico, imageUrl);
         fs.unlinkSync(foto);
 
         res.status(200).json({ message: "Se subió la imagen correctamente." });

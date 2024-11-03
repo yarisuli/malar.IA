@@ -44,6 +44,7 @@ const getDiagnostico = async (req, res) => {
 };
 
 const createDiagnostico = async (req, res) => {
+    const idMedico = req.id;
     const idPaciente = req.params.idPaciente;
     const { analisisIA, notas } = req.body;
 
@@ -51,7 +52,7 @@ const createDiagnostico = async (req, res) => {
         return res.status(400).json({ message: "Faltan campos por llenar." });
 
     try {
-        await diagnosticoService.createDiagnostico(analisisIA, notas, idPaciente);
+        await diagnosticoService.createDiagnostico(analisisIA, notas, idPaciente, idMedico);
         res.status(201).json({ message: "Se creó el diagnóstico correctamente." });
 
     } catch (error) {

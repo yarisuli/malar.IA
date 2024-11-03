@@ -3,10 +3,7 @@ import { client } from "../db.js";
 const getMedicoDiagnosticos = async (idMedico) => {
 
     const result = await client.query(`
-    SELECT diagnostico.* FROM diagnostico 
-    INNER JOIN paciente
-    ON diagnostico.id_paciente = paciente.id_paciente
-    WHERE paciente.id_medico = $1`, [idMedico]);
+    SELECT diagnostico.* FROM diagnostico WHERE id_medico = $1`, [idMedico]);
 
     return result;
 
@@ -25,14 +22,13 @@ const getDiagnostico = async (id) => {
     }
 };
 
-const createDiagnostico = async (analisisIA, notas, idPaciente) => {
+const createDiagnostico = async (analisisIA, notas, idPaciente, idMedico) => {
 
     const result = await client.query(`
-    INSERT INTO diagnostico (analisis_ia, notas, id_paciente) 
-    VALUES ($1, $2, $3)`, [analisisIA, notas, idPaciente]);
+    INSERT INTO diagnostico (analisis_ia, notas, id_paciente, id_medico) 
+    VALUES ($1, $2, $3, $4)`, [analisisIA, notas, idPaciente, idMedico]);
     
     return result;
-
 }
 
 const deleteDiagnostico = async (id) => {
@@ -53,9 +49,9 @@ const updateDiagnostico = async (id, idPaciente) => {
 
 }
 
-const postImagen = async (idPaciente, imageUrl) => {
+const postImagen = async (idMedico, imageUrl) => {
     const result = await client.query(
-    `INSERT INTO diagnostico (id_paciente, foto) VALUES ($1, $2)`, [idPaciente, imageUrl]);
+    `INSERT INTO diagnostico (id_medico, foto) VALUES ($1, $2)`, [idMedico, imageUrl]);
 
     return result;
 }
