@@ -64,23 +64,42 @@ const createPaciente = async (req, res) => {
 };
 
 
-const deletePaciente = async (req, res) => 
-{
-    const id = req.params.id;
+const deletePaciente = async (req, res) => {
+    const { id } = req.params;
 
-    pacienteService.deletePaciente(id); 
+    if (!id) {
+        return res.status(400).json({ message: "ID de paciente no proporcionado." });
+    }
 
-    res.send("Se eliminó el paciente correctamente.");
+    try {
+        await pacienteService.deletePaciente(id);
+
+        res.status(200).json({ message: "Se eliminó el paciente correctamente." });
+
+    } catch (error) {
+        console.error("Error al eliminar el paciente:", error);
+        res.status(500).json({ message: "Error al eliminar el paciente." });
+    }
 };
 
-const updatePaciente = async (req, res) => 
-{
-    const id = req.params.id;
-    const nacimiento = req.body.nacimiento;
 
-    pacienteService.updatePaciente(id, nacimiento);
+const updatePaciente = async (req, res) => {
+    const { id } = req.params;
+    const { nacimiento } = req.body;
 
-    res.send("Se actualizó el paciente correctamente.");
+    if (!id || !nacimiento) {
+        return res.status(400).json({ message: "ID de paciente o campo de nacimiento no proporcionado." });
+    }
+
+    try {
+
+        await pacienteService.updatePaciente(id, nacimiento);
+
+        res.status(200).json({ message: "Se actualizó el paciente correctamente." });
+    } catch (error) {
+        console.error("Error al actualizar el paciente:", error);
+        res.status(500).json({ message: "Error al actualizar el paciente." });
+    }
 };
 
 const paciente = 
