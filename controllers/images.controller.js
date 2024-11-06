@@ -25,7 +25,6 @@ const postImagen = async (req, res) => {
         
         const imageUrl = result.secure_url;
 
-
         await diagnosticoService.postImagen(idMedico, imageUrl);
         fs.unlinkSync(foto);
 
@@ -37,13 +36,8 @@ const postImagen = async (req, res) => {
     }
 }
 
-const sendURL = async (req, res) => {
-
-}
-
 const imagen = {
     postImagen,
-    sendURL
 };
 
 export default imagen;
