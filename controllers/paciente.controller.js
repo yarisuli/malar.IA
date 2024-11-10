@@ -12,7 +12,7 @@ const getPacientes = async (req, res) => {
         const result = await pacienteService.getPacientes(idMedico);
 
         if (!result || result.rows.length === 0) {
-            return res.status(404).json({ message: "No se encontraron pacientes para este médico." });
+            return res.status(204).json({ message: "No se encontraron pacientes para este médico." });
         }
 
         res.status(200).json(result.rows);
@@ -34,7 +34,7 @@ const getPaciente = async (req, res) => {
         const result = await pacienteService.getPaciente(id);
 
         if (!result || result.rows.length === 0) {
-            return res.status(404).json({ message: "Paciente no encontrado." });
+            return res.status(204).json({ message: "Paciente no encontrado." });
         }
 
         res.status(200).json(result.rows);
