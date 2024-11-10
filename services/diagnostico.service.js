@@ -24,11 +24,11 @@ const getDiagnostico = async (id) => {
     }
 };
 
-const createDiagnostico = async (analisisIA, notas, idPaciente, idMedico) => {
+const createDiagnostico = async (analisisIA, notas, idPaciente, idMedico, fechaAnalisis) => {
     try {
         const result = await client.query(`
-            INSERT INTO diagnostico (analisis_ia, notas, id_paciente, id_medico) 
-            VALUES ($1, $2, $3, $4)`, [analisisIA, notas, idPaciente, idMedico]);
+            INSERT INTO diagnostico (analisis_ia, notas, id_paciente, id_medico, fechaAnalisis) 
+            VALUES ($1, $2, $3, $4, $5)`, [analisisIA, notas, idPaciente, idMedico, fechaAnalisis]);
         return result;
 
     } catch (error) {
