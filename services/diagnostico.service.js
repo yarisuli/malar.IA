@@ -49,14 +49,14 @@ const deleteDiagnostico = async (id) => {
     }
 };
 
-const updateDiagnostico = async (id, idPaciente) => {
+const updatePacienteDiagnostico = async (id, idPaciente) => {
     try {
         const result = await client.query(`
             UPDATE diagnostico SET id_paciente = $1 WHERE id_diag = $2`, [idPaciente, id]);
         return result;
 
     } catch (error) {
-        console.error("Error al actualizar el diagnóstico:", error);
+        console.error("Error al asignar diagnóstico al paciente:", error);
         throw new Error("No se pudo actualizar el diagnóstico.");
     }
 };
@@ -68,8 +68,8 @@ const postImagen = async (idMedico, imageUrl) => {
         return result;
 
     } catch (error) {
-        console.error("Error al insertar la imagen:", error);
-        throw new Error("No se pudo insertar la imagen.");
+        console.error("Error al guardar la imagen:", error);
+        throw new Error("No se pudo guardar la imagen.");
     }
 };
 
@@ -79,6 +79,6 @@ export default {
     getMedicoDiagnosticos,
     createDiagnostico,
     deleteDiagnostico,
-    updateDiagnostico, 
+    updatePacienteDiagnostico, 
     postImagen
 }

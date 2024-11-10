@@ -69,13 +69,13 @@ const deleteDiagnostico = async (req, res) => {
     res.send("Se eliminó el diagnóstico correctamente.");
 };
 
-const updateDiagnostico = async (req, res) => {
+const updatePacienteDiagnostico = async (req, res) => {
     const id = req.params.id;
     const idPaciente = req.body.idPaciente;
 
-    diagnosticoService.updateDiagnostico(id, idPaciente);
+    diagnosticoService.updatePacienteDiagnostico(id, idPaciente);
 
-    res.send("Se actualizó el diagnóstico correctamente.");
+    res.send("Se asigno el paciente al diagnostico correctamente.");
 };
 
 const diagnostico =
@@ -84,7 +84,7 @@ const diagnostico =
     getDiagnostico,
     createDiagnostico,
     deleteDiagnostico,
-    updateDiagnostico
+    updatePacienteDiagnostico
 };
 
 export default diagnostico;

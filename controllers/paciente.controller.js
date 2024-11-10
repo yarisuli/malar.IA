@@ -11,10 +11,9 @@ const getPacientes = async (req, res) => {
     try {
         const result = await pacienteService.getPacientes(idMedico);
 
-        // if (!result || result.rows.length === 0) {
-        // // return res.status(204).json({ message: "No se encontraron pacientes para este médico." });
-        // return res.status(204).json();
-        // }
+        if (!result || result.rows.length === 0) {
+        return res.status(204).json({ message: "No se encontraron pacientes para este médico." });
+        }
 
         res.status(200).json(result.rows);
 
