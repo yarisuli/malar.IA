@@ -4,7 +4,7 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get("/medico/:idMedico", verifyToken, diagnostico.getMedicoDiagnosticos);
+router.get("/medico", verifyToken, diagnostico.getMedicoDiagnosticos);
 router.get("/:id", verifyToken, diagnostico.getDiagnostico);
 router.post("/:idPaciente", verifyToken, diagnostico.createDiagnostico);
 router.put("/:id", verifyToken, diagnostico.updatePacienteDiagnostico);

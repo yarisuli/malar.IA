@@ -11,7 +11,7 @@ const getMedicoDiagnosticos = async (req, res) => {
         const result = await diagnosticoService.getMedicoDiagnosticos(idMedico);
 
         if (result.rows.length === 0) {
-            return res.status(404).json({ error: "Diagnósticos del medico no encontrados."});
+            return res.status(204).json({ error: "Diagnósticos del medico no encontrados."});
         }
 
         res.json(result.rows);
@@ -76,6 +76,19 @@ const updatePacienteDiagnostico = async (req, res) => {
     diagnosticoService.updatePacienteDiagnostico(id, idPaciente);
 
     res.send("Se asigno el paciente al diagnostico correctamente.");
+};
+
+const updateDiagnostico = async (req, res) => {
+
+
+    // try {
+    //     await diagnosticoService.updateDiagnostico(analisisIA, notas, idPaciente, idMedico);
+    //     res.status(201).json({ message: "Se creó el diagnóstico correctamente." });
+
+    // } catch (error) {
+    //     console.error('Error al crear diagnóstico:', error);
+    //     res.status(500).json({ error: "Error al crear el diagnóstico." });
+    // }
 };
 
 const diagnostico =
