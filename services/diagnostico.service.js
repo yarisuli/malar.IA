@@ -61,15 +61,39 @@ const updatePacienteDiagnostico = async (id, idPaciente) => {
     }
 };
 
-const postImagen = async (idMedico, imageUrl) => {
+const postImagen = async (idMedico, imageUrl, fechaAnalisis, data) => {
     try {
         const result = await client.query(`
-            INSERT INTO diagnostico (id_medico, foto) VALUES ($1, $2)`, [idMedico, imageUrl]);
+            INSERT INTO diagnostico (analisis_ia, id_medico, foto, fecha_analisis) VALUES ($1, $2, $3, $4)`, [data, idMedico, imageUrl, fechaAnalisis]);
         return result;
 
     } catch (error) {
         console.error("Error al guardar la imagen:", error);
         throw new Error("No se pudo guardar la imagen.");
+    }
+};
+
+const getIdDiagnostico = async (imageUrl) => {
+    try {
+        const result = await client.query(`
+            SELECT id_diag FROM diagnostico WHERE foto = $1`, [imageUrl]);
+        return result;
+
+    } catch (error) {
+        console.error("Error al obtener el ID del diagnóstico:", error);
+        throw new Error("Error al ejecutar la consulta en la base de datos.");
+    }
+};
+
+const getImagenDiagnostico = async (idDiag) => {
+    try {
+        const result = await client.query(`
+            SELECT foto FROM diagnostico WHERE id_diag = $1`, [idDiag]);
+        return result;
+
+    } catch (error) {
+        console.error("Error al obtener la imagen del diagnóstico:", error);
+        throw new Error("Error al ejecutar la consulta en la base de datos.");
     }
 };
 
@@ -80,5 +104,7 @@ export default {
     createDiagnostico,
     deleteDiagnostico,
     updatePacienteDiagnostico, 
-    postImagen
+    postImagen,
+    getIdDiagnostico,
+    getImagenDiagnostico
 }
