@@ -91,13 +91,31 @@ const updateDiagnostico = async (req, res) => {
     // }
 };
 
+const getIdDiagnostico = async (req, res) => {
+    const foto = req.body.foto; // Debe ser una URL de imagen
+
+    try {
+        const result = await diagnosticoService.getIdDiagnostico(foto);
+        if (result && result.rows.length > 0) {
+            res.json({ id: result.rows[0].id_diag });
+        } else {
+            res.status(404).json({ error: "Diagnóstico no encontrado." });
+        }
+    } catch (error) {
+        console.error("Error al obtener el diagnóstico:", error);
+        res.status(500).json({ error: "Error al obtener el diagnóstico." });
+    }
+};
+
+
 const diagnostico =
 {
     getMedicoDiagnosticos,
     getDiagnostico,
     createDiagnostico,
     deleteDiagnostico,
-    updatePacienteDiagnostico
+    updatePacienteDiagnostico,
+    getIdDiagnostico
 };
 
 export default diagnostico;
