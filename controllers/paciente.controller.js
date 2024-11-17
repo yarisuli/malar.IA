@@ -48,9 +48,9 @@ const createPaciente = async (req, res) => {
     const { nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp } = req.body;
     const idMedico = req.id; // ID DE MEDICO QUE ESTA EN EL TOKEN
 
-    if (!nombre || !apellido || !nacimiento || !sexo || !dni || !pais || !ocupacion || !numero || !mail || !instruccion || !idMedico) {
-        return res.status(400).json({ message: "Faltan campos por llenar." });
-    }
+    // if (!nombre || !apellido || !nacimiento || !sexo || !dni || !pais || !ocupacion || !numero || !mail || !instruccion || !idMedico) {
+    //     return res.status(400).json({ message: "Faltan campos por llenar." });
+    // }
 
     try {
         await pacienteService.createPaciente(nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp, idMedico);
