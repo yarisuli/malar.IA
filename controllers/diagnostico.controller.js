@@ -119,7 +119,7 @@ const diagnostico = {
     createDiagnostico,
     deleteDiagnostico,
     updatePacienteDiagnostico,
-    updateNotasDiagnostico,
+    updateNotasDiagnostico
 };
 
 export default diagnostico;

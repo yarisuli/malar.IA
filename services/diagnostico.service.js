@@ -24,6 +24,31 @@ const getDiagnostico = async (id) => {
     }
 };
 
+const getIdDiagnostico = async (imageUrl) => {
+    try {
+        const result = await client.query(`
+            SELECT id_diag FROM diagnostico WHERE foto = $1
+        `, [imageUrl]);
+        return result;
+
+    } catch (error) {
+        console.error("Error al obtener el ID del diagnóstico:", error);
+        throw new Error("Error al ejecutar la consulta en la base de datos.");
+    }
+};
+
+const getImagenDiagnostico = async (idDiag) => {
+    try {
+        const result = await client.query(`
+            SELECT foto FROM diagnostico WHERE id_diag = $1`, [idDiag]);
+        return result;
+
+    } catch (error) {
+        console.error("Error al obtener la imagen del diagnóstico:", error);
+        throw new Error("Error al ejecutar la consulta en la base de datos.");
+    }
+};
+
 const createDiagnostico = async (analisisIA, notas, idPaciente, idMedico, fechaAnalisis) => {
     try {
         const result = await client.query(`
@@ -80,36 +105,10 @@ const postImagen = async (idMedico, imageUrl, fechaAnalisis, data) => {
         return result;
 
     } catch (error) {
-        console.error("Error al guardar la imagen:", error);
-        throw new Error("No se pudo guardar la imagen.");
+        console.error("Error al guardar diagnostico:", error);
+        throw new Error("No se pudo guardar el diagnostico.");
     }
 };
-
-const getIdDiagnostico = async (imageUrl) => {
-    try {
-        const result = await client.query(`
-            SELECT id_diag FROM diagnostico WHERE foto = $1
-        `, [imageUrl]);
-        return result;
-
-    } catch (error) {
-        console.error("Error al obtener el ID del diagnóstico:", error);
-        throw new Error("Error al ejecutar la consulta en la base de datos.");
-    }
-};
-
-const getImagenDiagnostico = async (idDiag) => {
-    try {
-        const result = await client.query(`
-            SELECT foto FROM diagnostico WHERE id_diag = $1`, [idDiag]);
-        return result;
-
-    } catch (error) {
-        console.error("Error al obtener la imagen del diagnóstico:", error);
-        throw new Error("Error al ejecutar la consulta en la base de datos.");
-    }
-};
-
 
 export default {
     getDiagnostico,
@@ -119,5 +118,6 @@ export default {
     updatePacienteDiagnostico, 
     postImagen,
     getIdDiagnostico,
-    getImagenDiagnostico
+    getImagenDiagnostico,
+    updateNotasDiagnostico
 }

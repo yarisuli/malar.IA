@@ -63,10 +63,23 @@ const updatePaciente = async (id, nombre, apellido, nacimiento, sexo, dni, pais,
     }
 };
 
+const updateEstadoPaciente = async (id, estado) => {
+    try {
+        const result = await client.query(`
+            UPDATE paciente SET estado = $1 WHERE id_paciente = $2`, [estado, id]);
+        return result;
+
+    } catch (error) {
+        console.error("Error al asignar el estado del paciente:", error);
+        throw new Error("No se pudo asignar el estado al paciente.");
+    }
+};
+
 export default {
     getPacientes,
     getPaciente,
     createPaciente,
     deletePaciente,
-    updatePaciente
+    updatePaciente, 
+    updateEstadoPaciente
 };

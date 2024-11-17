@@ -1,4 +1,5 @@
 import diagnosticoService from "../services/diagnostico.service.js";
+import pacienteService from "../services/paciente.service.js";
 import cloudinary from "../upload.js";
 import fs from "fs";
 
@@ -57,10 +58,10 @@ const postImagen = async (req, res) => {
         // Obtener el ID del diagnóstico recién insertado
         const result3 = await diagnosticoService.getIdDiagnostico(imageUrl);
         console.log("imagen URL ", imageUrl);
-        console.log("rsult3", result3.rows);
+        console.log("result 3: ", result3.rows);
 
         if (result3 && result3.rows && result3.rows.length > 0) {
-        console.log("rows{0]", result3.rows[0])
+        console.log("rows[0]: ", result3.rows[0])
         const idDiag = result3.rows[0].id_diag ;
             console.log(idDiag);
             res.json({ idDiag });

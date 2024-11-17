@@ -9,5 +9,5 @@ router.get("/:id", verifyToken, diagnostico.getDiagnostico);
 router.post("/:idPaciente", verifyToken, diagnostico.createDiagnostico);
 router.put("/:id", verifyToken, diagnostico.updatePacienteDiagnostico);
 router.delete("/:id", verifyToken, diagnostico.deleteDiagnostico);
-
+router.put("/notas/:id", verifyToken, diagnostico.updateNotasDiagnostico);
 export default router;
