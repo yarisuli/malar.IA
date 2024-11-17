@@ -98,7 +98,6 @@ const getIdDiagnostico = async (imageUrl) => {
     }
 };
 
-
 const getImagenDiagnostico = async (idDiag) => {
     try {
         const result = await client.query(`

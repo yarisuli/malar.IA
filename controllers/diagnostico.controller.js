@@ -3,7 +3,7 @@ import cloudinary from "../upload.js";
 import fs from "fs";
 
 const getMedicoDiagnosticos = async (req, res) => {
-    const idMedico = req.id; // EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
+    const idMedico = req.id; 
     console.log(idMedico);
 
     try {
@@ -47,7 +47,7 @@ const createDiagnostico = async (req, res) => {
     const idPaciente = req.params.idPaciente;
     const { analisisIA, notas } = req.body;
 
-    if (!analisisIA || !notas || !idPaciente) {
+    if (!analisisIA || !notas) {
         return res.status(400).json({ message: "Faltan campos por llenar." });
     }
 
@@ -99,8 +99,8 @@ const updateNotasDiagnostico = async (req, res) => {
     const id = req.params.id;
     const notas = req.body.notas;
 
-    if (!id || !notas) {
-        return res.status(400).json({ message: "El ID del diagnóstico y las notas son requeridos." });
+    if (!id) {
+        return res.status(400).json({ message: "El ID del diagnóstico es requerido." });
     }
 
     try {
