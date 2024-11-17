@@ -5,14 +5,14 @@ const getPacientes = async (req, res) => {
     const idMedico = req.id; // ID DE MEDICO QUE ESTA EN EL TOKEN
 
     if (!idMedico) {
-        return res.status(400).json({ message: "ID de médico no econtrado." });
+        return res.status(400).json({ message: "ID de médico no encontrado." });
     }
 
     try {
         const result = await pacienteService.getPacientes(idMedico);
 
         if (!result || result.rows.length === 0) {
-        return res.status(204).json({ message: "No se encontraron pacientes para este médico." });
+            return res.status(204).json({ message: "No se encontraron pacientes para este médico." });
         }
 
         res.status(200).json(result.rows);
@@ -63,7 +63,6 @@ const createPaciente = async (req, res) => {
     }
 };
 
-
 const deletePaciente = async (req, res) => {
     const { id } = req.params;
 
@@ -82,17 +81,15 @@ const deletePaciente = async (req, res) => {
     }
 };
 
-
 const updatePaciente = async (req, res) => {
     const { id } = req.params;
     const { nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp } = req.body;
 
     if (!nombre || !apellido || !nacimiento || !sexo || !dni || !pais || !ocupacion || !numero || !mail || !instruccion) {
-        return res.status(400).json({ message: "Falta llenar algun campo." });
+        return res.status(400).json({ message: "Falta llenar algún campo." });
     }
 
     try {
-
         await pacienteService.updatePaciente(id, nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp );
 
         res.status(200).json({ message: "Se actualizó el paciente correctamente." });
@@ -103,8 +100,7 @@ const updatePaciente = async (req, res) => {
     }
 };
 
-const paciente = 
-{
+const paciente = {
     getPacientes,
     getPaciente,
     createPaciente,

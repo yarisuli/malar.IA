@@ -61,6 +61,18 @@ const updatePacienteDiagnostico = async (id, idPaciente) => {
     }
 };
 
+const updateNotasDiagnostico = async (id, notas) => {
+    try {
+        const result = await client.query(`
+            UPDATE diagnostico SET notas = $1 WHERE id_diag = $2`, [notas, id]);
+        return result;
+
+    } catch (error) {
+        console.error("Error al asignar las notas al diagnostico:", error);
+        throw new Error("No se pudo actualizar el diagnóstico.");
+    }
+};
+
 const postImagen = async (idMedico, imageUrl, fechaAnalisis, data) => {
     try {
         const result = await client.query(`
@@ -76,7 +88,8 @@ const postImagen = async (idMedico, imageUrl, fechaAnalisis, data) => {
 const getIdDiagnostico = async (imageUrl) => {
     try {
         const result = await client.query(`
-            SELECT id_diag FROM diagnostico WHERE foto = $1`, [imageUrl]);
+            SELECT id_diag FROM diagnostico WHERE foto = $1
+        `, [imageUrl]);
         return result;
 
     } catch (error) {
@@ -84,6 +97,7 @@ const getIdDiagnostico = async (imageUrl) => {
         throw new Error("Error al ejecutar la consulta en la base de datos.");
     }
 };
+
 
 const getImagenDiagnostico = async (idDiag) => {
     try {

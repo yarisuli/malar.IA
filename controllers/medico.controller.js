@@ -1,7 +1,7 @@
 import { client } from "../db.js";
 import medicoService from "../services/medico.service.js";
 
-//NO SIRVE PARA WEB, SIRVE PARA MI
+// NO SIRVE PARA WEB, SIRVE PARA MI
 const getMedicos = async (req, res) => {
     try {
         const result = await medicoService.getMedicos();
@@ -15,6 +15,10 @@ const getMedicos = async (req, res) => {
 
 const getMedicoById = async (req, res) => {
     const id = req.params.id;
+
+    if (!id) {
+        return res.status(400).json({ message: 'El ID del médico es requerido.' });
+    }
 
     try {
         const result = await medicoService.getMedicoById(id);
@@ -33,6 +37,10 @@ const getMedicoById = async (req, res) => {
 
 const getMedicoByMail = async (req, res) => {
     const mail = req.body.mail;
+
+    if (!mail) {
+        return res.status(400).json({ message: 'El correo del médico es requerido.' });
+    }
 
     try {
         const result = await medicoService.getMedicoByMail(mail);
@@ -69,9 +77,12 @@ const createMedico = async (req, res) => {
     }
 };
 
-
 const deleteMedico = async (req, res) => {
     const id = req.params.id;
+
+    if (!id) {
+        return res.status(400).json({ message: 'El ID del médico es requerido.' });
+    }
 
     try {
         const result = await medicoService.deleteMedico(id);
@@ -92,6 +103,10 @@ const updateMedico = async (req, res) => {
     const id = req.params.id;
     const { nombre, apellido, mail, telefono, pfp } = req.body;
 
+    if (!id || !nombre || !apellido || !mail || !telefono || !pfp) {
+        return res.status(400).json({ message: 'Todos los campos son requeridos.' });
+    }
+
     try {
         const result = await medicoService.updateMedico(id, nombre, apellido, mail, telefono, pfp);
 
@@ -107,8 +122,7 @@ const updateMedico = async (req, res) => {
     }
 };
 
-const medico =
-{
+const medico = {
     getMedicos,
     getMedicoById,
     getMedicoByMail,

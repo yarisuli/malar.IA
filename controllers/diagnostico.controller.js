@@ -3,11 +3,10 @@ import cloudinary from "../upload.js";
 import fs from "fs";
 
 const getMedicoDiagnosticos = async (req, res) => {
-    const idMedico = req.id; //EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
+    const idMedico = req.id; // EL ID MEDICO LO TIENE QUE AGARRAR DEL ID DEL MEDICO QUE INICIO SESION
     console.log(idMedico);
 
     try {
-
         const result = await diagnosticoService.getMedicoDiagnosticos(idMedico);
 
         if (result.rows.length === 0) {
@@ -23,13 +22,13 @@ const getMedicoDiagnosticos = async (req, res) => {
 };
 
 const getDiagnostico = async (req, res) => {
+    const id = req.params.id;
+
+    if (!id) {
+        return res.status(400).json({ error: "Se necesita el ID del diagnóstico." });
+    }
+
     try {
-        const id = req.params.id;
-
-        if (!id) {
-            return res.status(400).json({ error: "Se necesita el ID del diagnóstico." });
-        }
-
         const result = await diagnosticoService.getDiagnostico(id);
 
         if (result.rows.length === 0) {
@@ -48,8 +47,9 @@ const createDiagnostico = async (req, res) => {
     const idPaciente = req.params.idPaciente;
     const { analisisIA, notas } = req.body;
 
-    if (!analisisIA || !notas || !idPaciente)
+    if (!analisisIA || !notas || !idPaciente) {
         return res.status(400).json({ message: "Faltan campos por llenar." });
+    }
 
     try {
         await diagnosticoService.createDiagnostico(analisisIA, notas, idPaciente, idMedico);
@@ -64,58 +64,62 @@ const createDiagnostico = async (req, res) => {
 const deleteDiagnostico = async (req, res) => {
     const id = req.params.id;
 
-    diagnosticoService.deleteDiagnostico(id);
+    if (!id) {
+        return res.status(400).json({ message: "El ID del diagnóstico es requerido." });
+    }
 
-    res.send("Se eliminó el diagnóstico correctamente.");
+    try {
+        await diagnosticoService.deleteDiagnostico(id);
+        res.send("Se eliminó el diagnóstico correctamente.");
+    } catch (error) {
+        console.error("Error al eliminar el diagnóstico:", error);
+        res.status(500).json({ message: "Error al eliminar el diagnóstico." });
+    }
 };
 
 const updatePacienteDiagnostico = async (req, res) => {
     const id = req.params.id;
     const idPaciente = req.body.idPaciente;
 
-    diagnosticoService.updatePacienteDiagnostico(id, idPaciente);
-
-    res.send("Se asigno el paciente al diagnostico correctamente.");
-};
-
-const updateDiagnostico = async (req, res) => {
-
-
-    // try {
-    //     await diagnosticoService.updateDiagnostico(analisisIA, notas, idPaciente, idMedico);
-    //     res.status(201).json({ message: "Se creó el diagnóstico correctamente." });
-
-    // } catch (error) {
-    //     console.error('Error al crear diagnóstico:', error);
-    //     res.status(500).json({ error: "Error al crear el diagnóstico." });
-    // }
-};
-
-const getIdDiagnostico = async (req, res) => {
-    const foto = req.body.foto; // Debe ser una URL de imagen
+    if (!id || !idPaciente) {
+        return res.status(400).json({ message: "El ID del diagnóstico y el ID del paciente son requeridos." });
+    }
 
     try {
-        const result = await diagnosticoService.getIdDiagnostico(foto);
-        if (result && result.rows.length > 0) {
-            res.json({ id: result.rows[0].id_diag });
-        } else {
-            res.status(404).json({ error: "Diagnóstico no encontrado." });
-        }
+        await diagnosticoService.updatePacienteDiagnostico(id, idPaciente);
+        res.send("Se asignó el paciente al diagnóstico correctamente.");
+
     } catch (error) {
-        console.error("Error al obtener el diagnóstico:", error);
-        res.status(500).json({ error: "Error al obtener el diagnóstico." });
+        console.error("Error al actualizar el diagnóstico con el paciente:", error);
+        res.status(500).json({ message: "Error al asignar el paciente al diagnóstico." });
     }
 };
 
+const updateNotasDiagnostico = async (req, res) => {
+    const id = req.params.id;
+    const notas = req.body.notas;
 
-const diagnostico =
-{
+    if (!id || !notas) {
+        return res.status(400).json({ message: "El ID del diagnóstico y las notas son requeridos." });
+    }
+
+    try {
+        await diagnosticoService.updateNotasDiagnostico(id, notas);
+        res.send("Se actualizaron las notas del diagnóstico correctamente.");
+
+    } catch (error) {
+        console.error("Error al actualizar las notas del diagnóstico:", error);
+        res.status(500).json({ message: "Error al actualizar las notas del diagnóstico." });
+    }
+};
+
+const diagnostico = {
     getMedicoDiagnosticos,
     getDiagnostico,
     createDiagnostico,
     deleteDiagnostico,
     updatePacienteDiagnostico,
-    getIdDiagnostico
+    updateNotasDiagnostico,
 };
 
 export default diagnostico;
