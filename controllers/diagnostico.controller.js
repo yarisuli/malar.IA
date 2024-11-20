@@ -1,4 +1,5 @@
 import diagnosticoService from "../services/diagnostico.service.js";
+import pacienteService from "../services/paciente.service.js";
 import cloudinary from "../upload.js";
 import fs from "fs";
 
@@ -78,20 +79,28 @@ const deleteDiagnostico = async (req, res) => {
 };
 
 const updatePacienteDiagnostico = async (req, res) => {
-    const id = req.params.id;
+    const idDiag = req.params.id;
     const idPaciente = req.body.idPaciente;
 
-    if (!id || !idPaciente) {
+    if (!idDiag || !idPaciente) {
         return res.status(400).json({ message: "El ID del diagnóstico y el ID del paciente son requeridos." });
     }
 
     try {
-        await diagnosticoService.updatePacienteDiagnostico(id, idPaciente);
-        res.send("Se asignó el paciente al diagnóstico correctamente.");
+        await diagnosticoService.updatePacienteDiagnostico(idDiag, idPaciente);
+        console.log("Se asignó el paciente al diagnóstico correctamente.");
+
+        const result = await diagnosticoService.getResultadoDiagnostico(idDiag);
+        const estadoPaciente = result.rows[0].analisis_ia;
+        console.log(estadoPaciente);
+
+        await pacienteService.updateEstadoPaciente(idPaciente, estadoPaciente);
+        console.log("Se actualizó el estado del paciente correctamente.");
+        res.send("Se asignó el paciente al diagnóstico y actualizó su estado correctamente.");
 
     } catch (error) {
-        console.error("Error al actualizar el diagnóstico con el paciente:", error);
-        res.status(500).json({ message: "Error al asignar el paciente al diagnóstico." });
+        console.error("Error al asignar paciente o actualizando su estado: ", error);
+        res.status(500).json({ message: "Error al asignar paciente al diagnóstico o actualizando su estado." });
     }
 };
 

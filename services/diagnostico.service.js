@@ -51,6 +51,18 @@ const getImagenDiagnostico = async (idDiag) => {
     }
 };
 
+const getResultadoDiagnostico = async (idDiag) => {
+    try {
+        const result = await client.query(`
+            SELECT analisis_ia FROM diagnostico WHERE id_diag = $1`, [idDiag]);
+        return result;
+
+    } catch (error) {
+        console.error("Error al obtener la imagen del diagnóstico:", error);
+        throw new Error("Error al ejecutar la consulta en la base de datos.");
+    }
+};
+
 const createDiagnostico = async (analisisIA, notas, idPaciente, idMedico, fechaAnalisis) => {
     try {
         const result = await client.query(`
@@ -76,10 +88,10 @@ const deleteDiagnostico = async (id) => {
     }
 };
 
-const updatePacienteDiagnostico = async (id, idPaciente) => {
+const updatePacienteDiagnostico = async (idDiag, idPaciente) => {
     try {
         const result = await client.query(`
-            UPDATE diagnostico SET id_paciente = $1 WHERE id_diag = $2`, [idPaciente, id]);
+            UPDATE diagnostico SET id_paciente = $1 WHERE id_diag = $2`, [idPaciente, idDiag]);
         return result;
 
     } catch (error) {
@@ -121,5 +133,6 @@ export default {
     postImagen,
     getIdDiagnostico,
     getImagenDiagnostico,
-    updateNotasDiagnostico
+    updateNotasDiagnostico,
+    getResultadoDiagnostico
 }
