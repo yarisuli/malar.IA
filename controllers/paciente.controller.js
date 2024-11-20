@@ -2,7 +2,7 @@ import { client } from "../db.js";
 import pacienteService from "../services/paciente.service.js";
 
 const getPacientes = async (req, res) => {
-    const idMedico = req.id; // ID DE MEDICO QUE ESTA EN EL TOKEN
+    const idMedico = req.id;
 
     if (!idMedico) {
         return res.status(400).json({ message: "ID de médico no encontrado." });
@@ -38,6 +38,7 @@ const getPaciente = async (req, res) => {
         }
 
         res.status(200).json(result.rows);
+
     } catch (error) {
         console.error("Error al obtener el paciente:", error);
         res.status(500).json({ message: "Error al obtener el paciente" });
@@ -46,7 +47,7 @@ const getPaciente = async (req, res) => {
 
 const createPaciente = async (req, res) => {
     const { nombre, apellido, nacimiento, sexo, dni, pais, ocupacion, numero, mail, instruccion, pfp } = req.body;
-    const idMedico = req.id; // ID DE MEDICO QUE ESTA EN EL TOKEN
+    const idMedico = req.id; 
 
     // if (!nombre || !apellido || !nacimiento || !sexo || !dni || !pais || !ocupacion || !numero || !mail || !instruccion || !idMedico) {
     //     return res.status(400).json({ message: "Faltan campos por llenar." });

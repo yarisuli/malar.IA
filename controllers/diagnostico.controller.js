@@ -1,11 +1,8 @@
 import diagnosticoService from "../services/diagnostico.service.js";
 import pacienteService from "../services/paciente.service.js";
-import cloudinary from "../upload.js";
-import fs from "fs";
 
 const getMedicoDiagnosticos = async (req, res) => {
     const idMedico = req.id; 
-    console.log(idMedico);
 
     try {
         const result = await diagnosticoService.getMedicoDiagnosticos(idMedico);
@@ -92,7 +89,6 @@ const updatePacienteDiagnostico = async (req, res) => {
 
         const result = await diagnosticoService.getResultadoDiagnostico(idDiag);
         const estadoPaciente = result.rows[0].analisis_ia;
-        console.log(estadoPaciente);
 
         await pacienteService.updateEstadoPaciente(idPaciente, estadoPaciente);
         console.log("Se actualizó el estado del paciente correctamente.");

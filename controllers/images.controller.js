@@ -6,7 +6,7 @@ import fs from "fs";
 const postImagen = async (req, res) => {
     const idMedico = req.id;
     const foto = req.file.path;
-    const fechaAnalisis = new Date().toISOString(); // Formato aceptado por PostgreSQL
+    const fechaAnalisis = new Date().toISOString();
 
     if (!idMedico || !foto) {
         return res.status(400).json({ message: "Se necesita un médico y una imagen." });
@@ -21,14 +21,11 @@ const postImagen = async (req, res) => {
     }
 
     try {
-        // Subir imagen a Cloudinary
         const result = await cloudinary.uploader.upload(foto, {
             folder: 'uploads',
         });
 
         const imageUrl = result.secure_url;
-
-        // Enviar la imagen al servidor de predicción
         const body = { url: imageUrl };
 
         const response = await fetch("http://127.0.0.1:8000/predict", {
@@ -44,10 +41,9 @@ const postImagen = async (req, res) => {
         }
 
         const data = await response.json();
-        console.log(data); // infectado o no
 
-        // Guardar en la base de datos
         const result2 = await diagnosticoService.postImagen(idMedico, imageUrl, fechaAnalisis, data);
+        
         if (!result2) {
             console.log("No se guardó en la base de datos");
             return res.status(500).json({ error: "Error al guardar en la base de datos." });
@@ -55,13 +51,9 @@ const postImagen = async (req, res) => {
             console.log("Se guardó en la base de datos correctamente");
         }
 
-        // Obtener el ID del diagnóstico recién insertado
         const result3 = await diagnosticoService.getIdDiagnostico(imageUrl);
-        console.log("imagen URL ", imageUrl);
-        console.log("result 3: ", result3.rows);
 
         if (result3 && result3.rows && result3.rows.length > 0) {
-        console.log("rows[0]: ", result3.rows[0])
         const idDiag = result3.rows[0].id_diag ;
             console.log(idDiag);
             res.json({ idDiag });

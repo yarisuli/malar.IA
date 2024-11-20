@@ -8,7 +8,7 @@ const getMedicos = async (req, res) => {
         res.json(result.rows);
 
     } catch (error) {
-        console.error(error); 
+        console.error("Error al obtener medicos: ", error); 
         res.status(500).json({ message: 'Error al obtener los médicos.' });
     }
 };
@@ -51,7 +51,7 @@ const getMedicoByMail = async (req, res) => {
         res.json(result.rows);
 
     } catch (error) {
-        console.error(error); 
+        console.error("Error al obtener el médico.", error); 
         res.status(500).json({ message: 'Error al obtener el médico.' });
     }
 };
@@ -72,7 +72,7 @@ const createMedico = async (req, res) => {
 
         res.send("Se creó el usuario correctamente.");
     } catch (error) {
-        console.error(error); 
+        console.error("Error al crear el médico.", error); 
         res.status(500).json({ message: 'Error al crear el médico.' });
     }
 };
