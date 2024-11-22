@@ -1,6 +1,9 @@
 import express from "express";
+import cors from "cors";
 const app = express();
 const port = 3000;
+
+app.use(cors());
 
 import diagnosticoRouter from "./routes/diagnostico.router.js"
 import medicoRouter from "./routes/medico.router.js"
