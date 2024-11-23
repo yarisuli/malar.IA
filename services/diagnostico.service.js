@@ -16,7 +16,7 @@ const getDiagnostico = async (id) => {
     try {
         const result = await client.query(`
             SELECT diagnostico.*, paciente.nombre, paciente.apellido 
-            FROM diagnostico INNER JOIN paciente ON paciente.id_paciente = diagnostico.id_paciente
+            FROM diagnostico LEFT JOIN paciente ON paciente.id_paciente = diagnostico.id_paciente
             WHERE id_diag = $1`, [id]);
         return result;
 
