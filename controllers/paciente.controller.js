@@ -115,12 +115,30 @@ const updatePaciente = async (req, res) => {
     }
 };
 
+const dischargePaciente = async (req, res) => {
+    const { id } = req.params;
+
+    if (!id) {
+        return res.status(400).json({ message: "No se indico el paciente." });
+    }
+
+    try {
+        await pacienteService.updateEstadoPaciente(id, "-");
+
+        res.status(200).json({ message: "Se actualizó el paciente correctamente." });
+
+    } catch (error) {
+        console.error("Error al actualizar el paciente:", error);
+        res.status(500).json({ message: "Error al actualizar el paciente." });
+    }
+};
 const paciente = {
     getPacientes,
     getPaciente,
     createPaciente,
     deletePaciente,
-    updatePaciente
+    updatePaciente,
+    dischargePaciente
 };
 
 export default paciente;
