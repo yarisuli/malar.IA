@@ -3,7 +3,10 @@ import { client } from "../db.js";
 const getMedicoDiagnosticos = async (idMedico) => {
     try {
         const result = await client.query(`
-            SELECT diagnostico.* FROM diagnostico WHERE id_medico = $1`, [idMedico]);
+            SELECT diagnostico.*, paciente.nombre, paciente.apellido 
+            FROM diagnostico 
+            LEFT JOIN paciente ON paciente.id_paciente = diagnostico.id_paciente
+            WHERE diagnostico.id_medico = $1`, [idMedico]);
         return result;
 
     } catch (error) {
@@ -11,6 +14,7 @@ const getMedicoDiagnosticos = async (idMedico) => {
         throw new Error("No se pudo obtener los diagnósticos del médico.");
     }
 };
+
 
 const getDiagnostico = async (id) => {
     try {
