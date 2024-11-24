@@ -30,6 +30,22 @@ const getDiagnostico = async (id) => {
     }
 };
 
+const getDiagnosticosPaciente = async (id) => {
+    console.log("result pacdiag id", id);
+    try {
+        const result = await client.query(`
+            SELECT diagnostico.*
+            FROM diagnostico inner JOIN paciente ON paciente.id_paciente = diagnostico.id_paciente
+            WHERE diagnostico.id_paciente = $1`, [id]);
+            
+            return result;
+
+    } catch (error) {
+        console.error("Error al obtener el diagnósticos:", error);
+        throw new Error("Error al ejecutar la consulta en la base de datos.");
+    }
+};
+
 const getIdDiagnostico = async (imageUrl) => {
     try {
         const result = await client.query(`
@@ -130,6 +146,7 @@ const postImagen = async (idMedico, imageUrl, fechaAnalisis, data) => {
 
 export default {
     getDiagnostico,
+    getDiagnosticosPaciente,
     getMedicoDiagnosticos,
     createDiagnostico,
     deleteDiagnostico,

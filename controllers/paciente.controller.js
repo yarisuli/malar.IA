@@ -1,4 +1,5 @@
 import { client } from "../db.js";
+import diagnosticoService from "../services/diagnostico.service.js";
 import pacienteService from "../services/paciente.service.js";
 
 const getPacientes = async (req, res) => {
@@ -37,7 +38,20 @@ const getPaciente = async (req, res) => {
             return res.status(204).json({ message: "Paciente no encontrado." });
         }
 
-        res.status(200).json(result.rows);
+        const resultDiags = await diagnosticoService.getDiagnosticosPaciente(id);
+
+        const paciente =result.rows;
+        
+         const pacientediag =    
+            paciente.map(item => ({
+                ...item,
+                diagnosticos: resultDiags.rows,
+              })); 
+        
+              console.log("pacientediag", pacientediag);
+        
+
+        res.status(200).json(pacientediag);
 
     } catch (error) {
         console.error("Error al obtener el paciente:", error);

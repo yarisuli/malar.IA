@@ -61,7 +61,10 @@ const postImagen = async (req, res) => {
         if (result3 && result3.rows && result3.rows.length > 0) {
         const idDiag = result3.rows[0].id_diag ;
             console.log(idDiag);
-            res.json({ idDiag });
+            res.json({ 
+                "id_diag":idDiag,
+                "url": imageUrl
+                });
 
         } else {
             console.error("No se encontró el ID del diagnóstico");
