@@ -90,7 +90,8 @@ const updatePacienteDiagnostico = async (req, res) => {
         const result = await diagnosticoService.getResultadoDiagnostico(idDiag);
         const estadoPaciente = result.rows[0].analisis_ia;
 
-        await pacienteService.updateEstadoPaciente(idPaciente, estadoPaciente);
+
+        await pacienteService.updateEstadoPaciente(idPaciente, JSON.parse(estadoPaciente).resultado);
         console.log("Se actualizó el estado del paciente correctamente.");
         res.send("Se asignó el paciente al diagnóstico y actualizó su estado correctamente.");
 
