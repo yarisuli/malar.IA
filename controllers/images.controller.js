@@ -41,6 +41,11 @@ const postImagen = async (req, res) => {
         }
 
         const data = await response.json();
+        
+        if(!data.resultado) {
+            console.error('Error en la predicción:', data);
+            return res.status(422).json({ error: "Error en la predicción.", details: data});
+        };
 
         const result2 = await diagnosticoService.postImagen(idMedico, imageUrl, fechaAnalisis, data);
         
